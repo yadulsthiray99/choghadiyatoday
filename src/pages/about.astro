@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES } from '../lib/site';
+---
+<Base title="About ChoghadiyaToday" description="ChoghadiyaToday shows today's choghadiya, shubh muhurat and Rahu Kaal for Indian cities, calculated from each city's own sunrise and sunset.">
+  <h1>About ChoghadiyaToday</h1>
+  <p>ChoghadiyaToday gives the day and night choghadiya for {CITIES.length} Indian cities, in English, Hindi and Gujarati. Every table is calculated for that city's own sunrise and sunset, so Ahmedabad, Mumbai and Kolkata each get their correct times rather than one national table.</p>
+  <p>The pages are rebuilt every night after midnight IST, and your browser also recalculates the times for today's date and highlights the choghadiya that is running now. See <a href="/what-is-choghadiya/">what choghadiya is and how it is calculated</a>.</p>
+  <p>We are an independent site. For important ceremonies, confirm the muhurat with your family priest. Suggestions or a city to add: <a href="/contact/">contact</a>.</p>
+</Base>

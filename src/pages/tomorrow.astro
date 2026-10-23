@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES, forCity, label, span, wd, dt, hm, cityUrl } from '../lib/site';
+const list = ['ahmedabad', 'mumbai', 'jaipur', 'delhi', 'surat', 'pune', 'jodhpur', 'vadodara', 'bengaluru', 'udaipur', 'indore', 'rajkot'].map((s) => CITIES.find((x) => x.slug === s)!);
+const a = forCity(list[0], 1);
+const first = (x: typeof a, k: string) => x.day.find((p) => p.k === k) ?? x.night.find((p) => p.k === k)!;
+---
+<Base title={`Kal Ka Choghadiya ${dt(a)} | Tomorrow's Choghadiya | कल का चौघड़िया`}
+      description={`Tomorrow's choghadiya (${wd(a)}, ${dt(a)}) for Indian cities: day and night periods, shubh muhurat and Rahu Kaal. कल का चौघड़िया ${dt(a, 'hi')}.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › Tomorrow</p>
+  <h1>Kal ka choghadiya <span class="hi">| कल का चौघड़िया</span></h1>
+  <p class="answer">Tomorrow is <strong>{wd(a)}, {dt(a)}</strong> <span class="hi">({wd(a, 'hi')})</span>. The day choghadiya starts with <strong>{label(a.day[0].k)}</strong> at sunrise and the night choghadiya with <strong>{label(a.night[0].k)}</strong> at sunset. Exact times depend on the city:</p>
+  {list.map((x) => { const q = forCity(x, 1); return <>
+    <h2>{x.en} <span class="hi">{x.hi}</span>: sunrise {hm(q.rise)}</h2>
+    <p>Day: {q.day.map((p, i) => <>{i ? ' · ' : ''}<span class={['amrit', 'shubh', 'labh', 'chal'].includes(p.k) ? 'up' : 'down'}>{label(p.k)}</span> {hm(p.from)}</>)}</p>
+    <p>Night: {q.night.map((p, i) => <>{i ? ' · ' : ''}<span class={['amrit', 'shubh', 'labh', 'chal'].includes(p.k) ? 'up' : 'down'}>{label(p.k)}</span> {hm(p.from)}</>)}</p>
+    <p class="muted">Rahu Kaal {span(q.rahu)} · first Amrit {hm(first(q, 'amrit').from)} · <a href={cityUrl(x)}>{x.en} today and this week</a></p>
+  </>; })}
+  <p><a href="/cities/">Other cities</a></p>
+</Base>

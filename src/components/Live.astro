@@ -1,0 +1,57 @@
+---
+// Live layer: recompute tables for the visitor's current IST date (if the static build is from an earlier day),
+// highlight the choghadiya running now, and fill the "running now" banner. No external requests.
+---
+<script>
+  import { choghadiya, todayIST, minutesNowIST, NAMES, hm } from '../lib/chog.mjs';
+  const T = { en: ['Now', 'until', 'good', 'avoid'], hi: ['अभी', 'तक', 'शुभ', 'अशुभ'], gu: ['હાલ', 'સુધી', 'શુભ', 'અશુભ'] };
+  function run() {
+    const [y, m, d] = todayIST();
+    const now = minutesNowIST();
+    document.querySelectorAll<HTMLElement>('.chog').forEach((box) => {
+      const lat = +box.dataset.lat!, lon = +box.dataset.lon!, lang = (box.dataset.lang || 'en') as 'en' | 'hi' | 'gu';
+      const offset = +(box.dataset.offset || 0);
+      const date = new Date(Date.UTC(y, m - 1, d + offset));
+      const [yy, mm, dd] = [date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate()];
+      const r = choghadiya(yy, mm, dd, lat, lon);
+      const rows = [...r.day, ...r.night];
+      const trs = box.querySelectorAll<HTMLTableRowElement>('tr[data-from]');
+      if (trs.length && box.dataset.date !== `${r.y}-${r.m}-${r.d}`) {
+        trs.forEach((tr, i) => {
+          const p = rows[i]; const n = (NAMES as any)[p.k];
+          tr.className = n.good ? 'g' : 'b'; tr.dataset.from = String(Math.round(p.from)); tr.dataset.to = String(Math.round(p.to));
+          const td = tr.children;
+          (td[0] as HTMLElement).innerHTML = `<strong>${n[lang]}</strong>${lang === 'en' ? ` <span class="hi">${n.hi}</span>` : ''}`;
+          td[1].textContent = `${hm(p.from)} – ${hm(p.to)}`;
+        });
+        box.dataset.date = `${r.y}-${r.m}-${r.d}`;
+        document.querySelectorAll<HTMLElement>('[data-stale]').forEach((e) => (e.hidden = false));
+      }
+      if (offset) return;
+      // which period is running: today's rows, or (before sunrise) last night's period from yesterday's choghadiya
+      let cur = null as null | { k: string; to: number };
+      trs.forEach((tr) => { const on = now >= +tr.dataset.from! && now < +tr.dataset.to!; tr.classList.toggle('now', on); if (on) { const p = rows[[...trs].indexOf(tr)]; cur = { k: p.k, to: p.to }; } });
+      if (!cur && now < r.rise) {
+        const q = new Date(Date.UTC(y, m - 1, d - 1)); const py = choghadiya(q.getUTCFullYear(), q.getUTCMonth() + 1, q.getUTCDate(), lat, lon);
+        const p = py.night.find((x) => now + 1440 >= x.from && now + 1440 < x.to); if (p) cur = { k: p.k, to: p.to };
+      }
+      const el = document.querySelector<HTMLElement>(`[data-now="${box.closest('[id]')?.id}"]`);
+      if (cur && el) {
+        const n = (NAMES as any)[(cur as any).k]; const t = T[lang];
+        el.innerHTML = `<b>${t[0]}:</b> <span class="${n.good ? 'up' : 'down'}">${n[lang]} (${n.good ? t[2] : t[3]})</span> ${lang === 'en' ? 'until ' + hm((cur as any).to) : hm((cur as any).to) + ' ' + t[1]}`;
+        el.hidden = false;
+      }
+    });
+  }
+  run();
+  setInterval(run, 60000);
+  const sel = document.querySelector<HTMLSelectElement>('#city');
+  sel?.addEventListener('change', () => {
+    if (sel.value) { location.href = sel.value; return; }
+    const o = sel.selectedOptions[0]; const box = document.querySelector<HTMLElement>('#home .chog');
+    if (!o || !box) return;
+    box.dataset.lat = o.dataset.lat!; box.dataset.lon = o.dataset.lon!; box.dataset.date = '';
+    const h = document.querySelector('#home-city'); if (h) h.textContent = `${o.dataset.name} choghadiya today`;
+    run(); box.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>

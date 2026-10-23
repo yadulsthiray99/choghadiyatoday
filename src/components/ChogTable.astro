@@ -1,0 +1,25 @@
+---
+// Day + night choghadiya tables. data-* attributes let the browser script re-render for the visitor's real date
+// and highlight the running period (the static HTML is correct for the build date).
+import { label, isGood, span, type Chog } from '../lib/site';
+interface Props { r: Chog; lang?: 'en' | 'hi' | 'gu'; lat: number; lon: number; heads?: { day: string; night: string; name: string; time: string; type: string; good: string; bad: string } }
+const { r, lang = 'en', lat, lon, heads = { day: 'Day choghadiya (sunrise to sunset)', night: 'Night choghadiya (sunset to next sunrise)', name: 'Choghadiya', time: 'Time', type: 'Type', good: 'Good', bad: 'Avoid' } } = Astro.props;
+const second = lang === 'en' ? 'hi' : null;
+---
+<div class="chog" data-lat={lat} data-lon={lon} data-lang={lang} data-date={`${r.y}-${r.m}-${r.d}`}>
+  {[['day', heads.day, r.day], ['night', heads.night, r.night]].map(([key, title, rows]: any) => (
+    <>
+      <h3>{title}</h3>
+      <div class="scroll"><table class="ct"><tbody>
+        <tr><th>{heads.name}</th><th class="num">{heads.time}</th><th>{heads.type}</th></tr>
+        {rows.map((p: any) => (
+          <tr class={isGood(p.k) ? 'g' : 'b'} data-from={Math.round(p.from)} data-to={Math.round(p.to)}>
+            <td><strong>{label(p.k, lang)}</strong>{second && <span class="hi"> {label(p.k, second as any)}</span>}</td>
+            <td class="num">{span(p)}</td>
+            <td>{isGood(p.k) ? heads.good : heads.bad}</td>
+          </tr>
+        ))}
+      </tbody></table></div>
+    </>
+  ))}
+</div>

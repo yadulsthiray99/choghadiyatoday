@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import ChogTable from '../../components/ChogTable.astro';
+import { GU_CITIES, DEFAULT, forCity, label, span, wd, dt, hm, guUrl } from '../../lib/site';
+const c = DEFAULT, r = forCity(c);
+const heads = { day: 'દિવસના ચોઘડિયા', night: 'રાત્રિના ચોઘડિયા', name: 'ચોઘડિયું', time: 'સમય', type: 'પ્રકાર', good: 'શુભ', bad: 'અશુભ' };
+---
+<Base lang="gu" title={`આજના ચોઘડિયા ${dt(r, 'gu')} | Gujarati Choghadiya Today | ગુજરાતી ચોઘડિયા`}
+      description={`આજના ચોઘડિયા ગુજરાતીમાં, ${wd(r, 'gu')} ${dt(r, 'gu')}: અમદાવાદ, સુરત, વડોદરા, રાજકોટ સહિત ${GU_CITIES.length} શહેરો માટે દિવસ અને રાત્રિના ચોઘડિયા અને રાહુકાળ.`}>
+  <h1>આજના ચોઘડિયા <span class="hi">| Gujarati choghadiya</span></h1>
+  <p class="now-banner" data-now="gu" hidden></p>
+  <p class="answer"><strong>{wd(r, 'gu')}, {dt(r, 'gu')}</strong>. નીચેના સમય {c.gu} માટે છે (સૂર્યોદય {hm(r.rise)}, સૂર્યાસ્ત {hm(r.set)}). દરેક શહેરનો સૂર્યોદય અલગ હોવાથી તમારું શહેર પસંદ કરો. રાહુકાળ: <strong>{span(r.rahu)}</strong>.</p>
+  <div id="gu"><ChogTable r={r} lat={c.lat} lon={c.lon} lang="gu" heads={heads} /></div>
+  <h2>શહેર પ્રમાણે ચોઘડિયા</h2>
+  <ul class="grid">{GU_CITIES.map((o) => { const q = forCity(o); return <li><a href={guUrl(o)}>{o.gu}</a><br /><span class="muted">સૂર્યોદય {hm(q.rise)} · {label(q.day[0].k, 'gu')}</span></li>; })}</ul>
+  <h2>ચોઘડિયાનો અર્થ</h2>
+  <p><strong>અમૃત, શુભ, લાભ</strong> શ્રેષ્ઠ ચોઘડિયા છે અને <strong>ચલ</strong> પ્રવાસ માટે સારું ગણાય છે. <strong>ઉદ્વેગ, રોગ, કાળ</strong> માં નવું કામ શરૂ કરવાનું ટાળવામાં આવે છે. દિવસ (સૂર્યોદયથી સૂર્યાસ્ત) અને રાત્રિ (સૂર્યાસ્તથી બીજા દિવસના સૂર્યોદય)ને આઠ-આઠ સરખા ભાગમાં વહેંચીને ચોઘડિયા ગણાય છે.</p>
+</Base>

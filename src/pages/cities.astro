@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES, PAGE_CITIES, forCity, hm, cityUrl } from '../lib/site';
+const states = [...new Set(PAGE_CITIES.map((c) => c.state))].sort();
+---
+<Base title={`Choghadiya by City: ${PAGE_CITIES.length} Indian Cities | ChoghadiyaToday`} description={`Today's choghadiya for ${CITIES.length} Indian cities, grouped by state, with each city's sunrise time.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › All cities</p>
+  <h1>Choghadiya by city</h1>
+  <p>Choghadiya starts at local sunrise, so it shifts by several minutes from city to city. Pick the nearest city below, or use the <a href="/">city picker on the home page</a>, which covers {CITIES.length} cities.</p>
+  {states.map((s) => <>
+    <h2>{s}</h2>
+    <ul class="grid">{PAGE_CITIES.filter((c) => c.state === s).sort((a, b) => a.en.localeCompare(b.en)).map((c) => <li><a href={cityUrl(c)}>{c.en}</a> <span class="hi">{c.hi}</span><br /><span class="muted">sunrise {hm(forCity(c).rise)}</span></li>)}</ul>
+  </>)}
+</Base>

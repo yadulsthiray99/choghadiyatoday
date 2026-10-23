@@ -1,0 +1,20 @@
+{
+  "name": "choghadiyatoday",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "build:gated": "astro build && python scripts/quality_check.py * gujarati/*",
+    "preview": "astro preview",
+    "check:quality": "python scripts/quality_check.py when-to-plant-* zone/* frost-dates/*",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "astro": "^5.7.0",
+    "@astrojs/sitemap": "^3.3.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.0"
+  }
+}

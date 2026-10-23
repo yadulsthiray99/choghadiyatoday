@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import { NAMES, WEEKDAY } from '../lib/chog.mjs';
+const DAY = [['udveg', 'chal', 'labh', 'amrit', 'kaal', 'shubh', 'rog', 'udveg'], ['amrit', 'kaal', 'shubh', 'rog', 'udveg', 'chal', 'labh', 'amrit'], ['rog', 'udveg', 'chal', 'labh', 'amrit', 'kaal', 'shubh', 'rog'], ['labh', 'amrit', 'kaal', 'shubh', 'rog', 'udveg', 'chal', 'labh'], ['shubh', 'rog', 'udveg', 'chal', 'labh', 'amrit', 'kaal', 'shubh'], ['chal', 'labh', 'amrit', 'kaal', 'shubh', 'rog', 'udveg', 'chal'], ['kaal', 'shubh', 'rog', 'udveg', 'chal', 'labh', 'amrit', 'kaal']];
+const N = NAMES as any;
+const RAHU = [8, 2, 7, 5, 6, 4, 3];
+---
+<Base title="What Is Choghadiya? Meaning, Types and How It Is Calculated | चौघड़िया क्या है" description="Choghadiya divides day and night into eight parts each. The meaning of Amrit, Shubh, Labh, Chal, Udveg, Rog and Kaal, the weekday order, and how Rahu Kaal is found.">
+  <p class="crumbs"><a href="/">Choghadiya today</a> › What is choghadiya</p>
+  <h1>What is choghadiya? <span class="hi">चौघड़िया क्या है</span></h1>
+  <p class="answer">Choghadiya (चौघड़िया, ચોઘડિયા) is a traditional Hindu way of choosing a good time for a task. The time from sunrise to sunset is split into eight equal parts, and so is the time from sunset to the next sunrise. Each part, about an hour and a half long, is called a choghadiya and has one of seven qualities.</p>
+  <h2>The seven choghadiya and what they mean</h2>
+  <table><tbody>
+    <tr><th>Choghadiya</th><th>Hindi / Gujarati</th><th>Quality</th></tr>
+    {['amrit', 'shubh', 'labh', 'chal', 'udveg', 'rog', 'kaal'].map((k) => <tr><td><strong>{N[k].en}</strong></td><td>{N[k].hi} / {N[k].gu}</td><td>{N[k].good ? 'Good' : 'Avoid'}: {N[k].mean}</td></tr>)}
+  </tbody></table>
+  <h2>Why times differ between cities</h2>
+  <p>Because each choghadiya is one-eighth of the actual day or night, its length changes with the season and its start changes with your city's sunrise. In winter a day choghadiya can be under 80 minutes; in summer, over 100. A city in western India such as Ahmedabad sees sunrise around 15–40 minutes after Kolkata, so every period starts later. That is why a single "India" table is never exactly right.</p>
+  <h2>The weekday order (day choghadiya)</h2>
+  <p>The first choghadiya of each day is ruled by the planet of that weekday; the rest follow a fixed cycle.</p>
+  <div class="scroll"><table><tbody>
+    <tr><th>Day</th>{[1, 2, 3, 4, 5, 6, 7, 8].map((i) => <th>{i}</th>)}</tr>
+    {DAY.map((row, i) => <tr><td>{WEEKDAY.en[i]}</td>{row.map((k) => <td class={N[k].good ? 'up' : 'down'}>{N[k].en}</td>)}</tr>)}
+  </tbody></table></div>
+  <h2>Rahu Kaal</h2>
+  <p>Rahu Kaal is one of the eight daytime parts, different for each weekday, during which new work is traditionally avoided: {WEEKDAY.en.map((w, i) => `${w} part ${RAHU[i]}`).join(', ')}. With a 6:00 AM sunrise and 6:00 PM sunset that gives the familiar Monday 7:30–9:00, Saturday 9:00–10:30 and so on, but the real time moves with sunrise. Every city page shows today's Rahu Kaal for that city.</p>
+  <h2>How this site calculates</h2>
+  <p>Sunrise and sunset are computed for each city's coordinates with the NOAA solar equations, using the standard horizon of −0.833° for refraction and the sun's radius. Panchangs that use a different sunrise convention may show times one or two minutes apart. For marriages, griha pravesh and other major ceremonies, always confirm the muhurat with a priest or a full panchang.</p>
+</Base>

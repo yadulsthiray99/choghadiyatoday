@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import ChogTable from '../components/ChogTable.astro';
+import { CITIES, PAGE_CITIES, GU_CITIES, forCity, goodOf, label, span, wd, dt, hm, near, cityUrl, guUrl, type City } from '../lib/site';
+
+export function getStaticPaths() { return PAGE_CITIES.map((c) => ({ params: { city: c.slug }, props: { c } })); }
+const { c } = Astro.props as { c: City };
+const r = forCity(c), t = forCity(c, 1);
+const week = Array.from({ length: 7 }, (_, i) => forCity(c, i));
+const first = (x: typeof r, k: string) => x.day.find((p) => p.k === k) ?? x.night.find((p) => p.k === k);
+const best = ['amrit', 'shubh', 'labh'].map((k) => ({ k, p: first(r, k)! })).sort((a, b) => a.p.from - b.p.from);
+const delhi = CITIES.find((x) => x.slug === 'delhi')!, dr = forCity(delhi);
+const diff = Math.round(r.rise - dr.rise);
+const mins = (x: number) => `${Math.floor(x / 60)} h ${Math.round(x % 60)} min`;
+const title = `${c.en} Choghadiya Today ${dt(r)} | ${c.hi} का आज का चौघड़िया`;
+const description = `${c.en} choghadiya for ${wd(r)} ${dt(r)}: sunrise ${hm(r.rise)}, ${best.map((b) => `${label(b.k)} ${hm(b.p.from)}`).join(', ')}. Rahu Kaal ${span(r.rahu)}. Day and night choghadiya with tomorrow's times.`;
+const schema = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+  { '@type': 'ListItem', position: 1, name: 'Choghadiya today', item: new URL('/', Astro.site).href },
+  { '@type': 'ListItem', position: 2, name: `${c.en} choghadiya`, item: new URL(cityUrl(c), Astro.site).href }] }];
+const others = near(c);
+---
+<Base title={title} description={description} schema={schema}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › {c.state} › {c.en}</p>
+  <h1>{c.en} Choghadiya Today <span class="hi">| {c.hi} चौघड़िया</span></h1>
+  <p class="now-banner" data-now="today" hidden></p>
+  <p class="answer"><strong>{wd(r)}, {dt(r)}</strong> <span class="hi">({wd(r, 'hi')})</span>: sunrise in {c.en} is at <strong>{hm(r.rise)}</strong> and sunset at <strong>{hm(r.set)}</strong>.
+    Good times today: {best.map((b, i) => <>{i ? ', ' : ''}<strong>{label(b.k)}</strong> {span(b.p)}</>)}. Rahu Kaal is <strong>{span(r.rahu)}</strong>; avoid starting new work then.</p>
+  <p class="muted" data-stale hidden>These times have been updated for today's date by your browser.</p>
+
+  <h2>Aaj ka choghadiya in {c.en} <span class="hi">— आज का चौघड़िया</span></h2>
+  <div id="today"><ChogTable r={r} lat={c.lat} lon={c.lon} /></div>
+
+  <h2>Kal ka choghadiya: {wd(t)}, {dt(t)} <span class="hi">— कल का चौघड़िया</span></h2>
+  <p>Tomorrow in {c.en} the sun rises at {hm(t.rise)} and sets at {hm(t.set)}. Rahu Kaal tomorrow: {span(t.rahu)}.</p>
+  <div class="chog" data-offset="1" data-lat={c.lat} data-lon={c.lon} data-lang="en" data-date={`${t.y}-${t.m}-${t.d}`}>
+    <div class="scroll"><table class="ct"><tbody>
+      <tr><th>Day</th><th>Time</th><th>Night</th><th>Time</th></tr>
+      {t.day.map((p, i) => <tr class={['amrit', 'shubh', 'labh', 'chal'].includes(p.k) ? 'g' : 'b'}><td>{label(p.k)} <span class="hi">{label(p.k, 'hi')}</span></td><td class="num">{span(p)}</td><td>{label(t.night[i].k)} <span class="hi">{label(t.night[i].k, 'hi')}</span></td><td class="num">{span(t.night[i])}</td></tr>)}
+    </tbody></table></div>
+  </div>
+
+  <h2>Shubh muhurat this week in {c.en}</h2>
+  <p>The first Amrit, Shubh and Labh choghadiya of each day in {c.en}, with Rahu Kaal to avoid.</p>
+  <div class="scroll"><table><tbody>
+    <tr><th>Date</th><th class="num">Sunrise</th><th class="num">Amrit</th><th class="num">Shubh</th><th class="num">Labh</th><th class="num">Rahu Kaal</th></tr>
+    {week.map((w) => <tr><td>{wd(w).slice(0, 3)} {w.d}/{w.m}</td><td class="num">{hm(w.rise)}</td><td class="num">{hm(first(w, 'amrit')!.from)}</td><td class="num">{hm(first(w, 'shubh')!.from)}</td><td class="num">{hm(first(w, 'labh')!.from)}</td><td class="num">{hm(w.rahu.from)}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>How today's {c.en} choghadiya is worked out</h2>
+  <p>{c.en} ({c.lat.toFixed(2)}°N, {c.lon.toFixed(2)}°E) has {mins(r.set - r.rise)} of daylight today, so each day choghadiya lasts {Math.round(r.dayLen)} minutes; the night from {hm(r.set)} to tomorrow's sunrise at {hm(r.nextRise)} gives night choghadiya of {Math.round(r.nightLen)} minutes each.
+    {c.slug !== 'delhi' && <> Sunrise here is {Math.abs(diff)} minutes {diff > 0 ? 'later' : 'earlier'} than in Delhi, so every period starts {diff > 0 ? 'later' : 'earlier'} than the Delhi times you may see elsewhere.</>}</p>
+  {GU_CITIES.includes(c) && <p><a href={guUrl(c)}>{c.gu} ના આજના ચોઘડિયા (ગુજરાતીમાં)</a></p>}
+
+  {others.length > 0 && <>
+    <h2>Choghadiya in other {c.state} cities</h2>
+    <ul class="grid">{others.map((o) => <li><a href={cityUrl(o)}>{o.en}</a> <span class="hi">{o.hi}</span></li>)}</ul>
+  </>}
+  <p><a href="/cities/">All cities</a> · <a href="/what-is-choghadiya/">What is choghadiya?</a></p>
+</Base>

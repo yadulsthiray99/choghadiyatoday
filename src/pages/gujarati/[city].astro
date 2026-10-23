@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import ChogTable from '../../components/ChogTable.astro';
+import { GU_CITIES, forCity, goodOf, label, span, wd, dt, hm, guUrl, cityUrl, type City } from '../../lib/site';
+export function getStaticPaths() { return GU_CITIES.map((c) => ({ params: { city: c.slug }, props: { c } })); }
+const { c } = Astro.props as { c: City };
+const r = forCity(c), t = forCity(c, 1);
+const best = goodOf(r).slice(0, 4);
+const heads = { day: 'દિવસના ચોઘડિયા (સૂર્યોદયથી સૂર્યાસ્ત)', night: 'રાત્રિના ચોઘડિયા (સૂર્યાસ્તથી સૂર્યોદય)', name: 'ચોઘડિયું', time: 'સમય', type: 'પ્રકાર', good: 'શુભ', bad: 'અશુભ' };
+const others = GU_CITIES.filter((x) => x.slug !== c.slug);
+---
+<Base lang="gu" title={`${c.gu} આજના ચોઘડિયા ${dt(r, 'gu')} | ${c.en} Choghadiya in Gujarati`}
+      description={`${c.gu} ના આજના ચોઘડિયા, ${wd(r, 'gu')} ${dt(r, 'gu')}: સૂર્યોદય ${hm(r.rise)}, સૂર્યાસ્ત ${hm(r.set)}, રાહુકાળ ${span(r.rahu)}. દિવસ અને રાત્રિના ચોઘડિયા.`}>
+  <p class="crumbs"><a href="/gujarati/">ગુજરાતી ચોઘડિયા</a> › {c.gu}</p>
+  <h1>{c.gu} ના આજના ચોઘડિયા</h1>
+  <p class="now-banner" data-now="gu" hidden></p>
+  <p class="answer"><strong>{wd(r, 'gu')}, {dt(r, 'gu')}</strong>: {c.gu} માં સૂર્યોદય <strong>{hm(r.rise)}</strong> અને સૂર્યાસ્ત <strong>{hm(r.set)}</strong>. આજના શુભ સમય: {best.map((b, i) => <>{i ? ', ' : ''}<strong>{label(b.k, 'gu')}</strong> {span(b)}</>)}. રાહુકાળ: <strong>{span(r.rahu)}</strong>.</p>
+  <div id="gu"><ChogTable r={r} lat={c.lat} lon={c.lon} lang="gu" heads={heads} /></div>
+
+  <h2>આવતીકાલના ચોઘડિયા: {wd(t, 'gu')}, {dt(t, 'gu')}</h2>
+  <p>સૂર્યોદય {hm(t.rise)} · સૂર્યાસ્ત {hm(t.set)} · રાહુકાળ {span(t.rahu)}</p>
+  <div class="scroll"><table class="ct"><tbody>
+    <tr><th>દિવસ</th><th>સમય</th><th>રાત્રિ</th><th>સમય</th></tr>
+    {t.day.map((p, i) => <tr class={['amrit', 'shubh', 'labh', 'chal'].includes(p.k) ? 'g' : 'b'}><td>{label(p.k, 'gu')}</td><td class="num">{span(p)}</td><td>{label(t.night[i].k, 'gu')}</td><td class="num">{span(t.night[i])}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>ગુજરાતના અન્ય શહેરોના ચોઘડિયા</h2>
+  <ul class="grid">{others.map((o) => <li><a href={guUrl(o)}>{o.gu}</a> <span class="muted">{hm(forCity(o).rise)}</span></li>)}</ul>
+  <p><a href={cityUrl(c)}>{c.en} choghadiya in English / Hindi</a></p>
+</Base>

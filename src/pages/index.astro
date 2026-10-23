@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import ChogTable from '../components/ChogTable.astro';
+import { hero } from '../brand.mjs';
+import { CITIES, DEFAULT, hasPage, Y, M, D, forCity, label, span, wd, dt, hm, cityUrl } from '../lib/site';
+const c = DEFAULT, r = forCity(c);
+const top = ['ahmedabad', 'mumbai', 'jaipur', 'delhi', 'surat', 'pune', 'jodhpur', 'vadodara', 'bengaluru', 'udaipur', 'indore', 'rajkot', 'kolkata', 'hyderabad', 'chennai', 'lucknow']
+  .map((s) => CITIES.find((x) => x.slug === s)!).map((x) => ({ x, r: forCity(x) }));
+const first = (x: typeof r, k: string) => x.day.find((p) => p.k === k) ?? x.night.find((p) => p.k === k)!;
+const schema = [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'ChoghadiyaToday', url: 'https://choghadiyatoday.in/', inLanguage: ['en-IN', 'hi', 'gu'] }];
+---
+<Base title={`Aaj Ka Choghadiya ${dt(r)} | Today's Choghadiya | आज का चौघड़िया`}
+      description={`आज का चौघड़िया ${dt(r, 'hi')}: today's day and night choghadiya, shubh muhurat and Rahu Kaal for ${CITIES.length} Indian cities, calculated from each city's own sunrise and sunset.`} schema={schema}>
+  <div class="hero">
+    <div>
+      <h1>Aaj ka choghadiya <span class="hi">| आज का चौघड़िया</span></h1>
+      <p class="answer"><strong>{wd(r)}, {dt(r)}</strong> <span class="hi">({wd(r, 'hi')})</span>. Choghadiya depends on your city's sunrise, so pick your city for exact times. Below: {c.en}, where the day choghadiya begins at sunrise {hm(r.rise)} with <strong>{label(r.day[0].k)}</strong>.</p>
+      <p><label>Your city: <select id="city"><option value="">Choose city…</option>{[...CITIES].sort((a, b) => a.en.localeCompare(b.en)).map((x) => <option value={hasPage(x) ? cityUrl(x) : ''} data-lat={x.lat} data-lon={x.lon} data-name={x.en}>{x.en} — {x.hi}</option>)}</select></label></p>
+    </div>
+    <Fragment set:html={hero({ y: Y, m: M, d: D, lat: c.lat, lon: c.lon, city: c.en })} />
+  </div>
+  <p class="now-banner" data-now="home" hidden></p>
+
+  <h2 id="home-city">{c.en} choghadiya today</h2>
+  <div id="home"><ChogTable r={r} lat={c.lat} lon={c.lon} /></div>
+  <p>Rahu Kaal in {c.en} today: <strong>{span(r.rahu)}</strong>. <a href={cityUrl(c)}>Full {c.en} page with tomorrow and this week →</a></p>
+
+  <h2>Today's shubh times in major cities</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>City</th><th class="num">Sunrise</th><th class="num">First Amrit</th><th class="num">First Shubh</th><th class="num">First Labh</th><th class="num">Rahu Kaal</th></tr>
+    {top.map(({ x, r: q }) => <tr><td><a href={cityUrl(x)}>{x.en}</a> <span class="hi">{x.hi}</span></td><td class="num">{hm(q.rise)}</td><td class="num">{hm(first(q, 'amrit').from)}</td><td class="num">{hm(first(q, 'shubh').from)}</td><td class="num">{hm(first(q, 'labh').from)}</td><td class="num">{span(q.rahu)}</td></tr>)}
+  </tbody></table></div>
+  <p><a href="/cities/">All {CITIES.length} cities</a> · <a href="/tomorrow/">Kal ka choghadiya (tomorrow)</a> · <a href="/gujarati/">ગુજરાતી ચોઘડિયા</a> · <a href="/what-is-choghadiya/">What is choghadiya?</a></p>
+</Base>

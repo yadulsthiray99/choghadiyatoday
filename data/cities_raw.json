@@ -1,0 +1,810 @@
+[
+{
+"name": "Ahmedabad",
+"gn": "Ahmedabad",
+"lat": 23.02579,
+"lon": 72.58727,
+"pop": 6357693,
+"admin1": "09"
+},
+{
+"name": "Mumbai",
+"gn": "Mumbai",
+"lat": 19.07283,
+"lon": 72.88261,
+"pop": 12691836,
+"admin1": "16"
+},
+{
+"name": "Jaipur",
+"gn": "Jaipur",
+"lat": 26.91962,
+"lon": 75.78781,
+"pop": 3046163,
+"admin1": "24"
+},
+{
+"name": "Delhi",
+"gn": "Delhi",
+"lat": 28.65195,
+"lon": 77.23149,
+"pop": 11034555,
+"admin1": "07"
+},
+{
+"name": "Surat",
+"gn": "Surat",
+"lat": 21.19594,
+"lon": 72.83023,
+"pop": 4591246,
+"admin1": "09"
+},
+{
+"name": "Pune",
+"gn": "Pune",
+"lat": 18.51957,
+"lon": 73.85535,
+"pop": 3124458,
+"admin1": "16"
+},
+{
+"name": "Jodhpur",
+"gn": "Jodhpur",
+"lat": 26.26841,
+"lon": 73.00594,
+"pop": 1056191,
+"admin1": "24"
+},
+{
+"name": "Vadodara",
+"gn": "Vadodara",
+"lat": 22.29941,
+"lon": 73.20812,
+"pop": 1822221,
+"admin1": "09"
+},
+{
+"name": "Bengaluru",
+"gn": "Bengaluru",
+"lat": 12.97194,
+"lon": 77.59369,
+"pop": 8495492,
+"admin1": "19"
+},
+{
+"name": "Udaipur",
+"gn": "Udaipur",
+"lat": 24.58584,
+"lon": 73.71346,
+"pop": 451100,
+"admin1": "24"
+},
+{
+"name": "Indore",
+"gn": "Indore",
+"lat": 22.71792,
+"lon": 75.8333,
+"pop": 1994397,
+"admin1": "35"
+},
+{
+"name": "Rajkot",
+"gn": "R\u0101jkot",
+"lat": 22.29161,
+"lon": 70.79322,
+"pop": 1390640,
+"admin1": "09"
+},
+{
+"name": "Kolkata",
+"gn": "Kolkata",
+"lat": 22.56263,
+"lon": 88.36304,
+"pop": 4631392,
+"admin1": "28"
+},
+{
+"name": "Bikaner",
+"gn": "Bikaner",
+"lat": 28.01762,
+"lon": 73.31495,
+"pop": 644406,
+"admin1": "24"
+},
+{
+"name": "Bhopal",
+"gn": "Bhopal",
+"lat": 23.25469,
+"lon": 77.40289,
+"pop": 1798218,
+"admin1": "35"
+},
+{
+"name": "Gurgaon",
+"gn": "Gurugram",
+"lat": 28.4601,
+"lon": 77.02635,
+"pop": 886519,
+"admin1": "10"
+},
+{
+"name": "Hyderabad",
+"gn": "Hyderabad",
+"lat": 17.38405,
+"lon": 78.45636,
+"pop": 6993262,
+"admin1": "40"
+},
+{
+"name": "Thane",
+"gn": "Th\u0101ne",
+"lat": 19.19704,
+"lon": 72.96355,
+"pop": 1841488,
+"admin1": "16"
+},
+{
+"name": "Noida",
+"gn": "Noida",
+"lat": 28.58,
+"lon": 77.33,
+"pop": 293908,
+"admin1": "36"
+},
+{
+"name": "Lucknow",
+"gn": "Lucknow",
+"lat": 26.83928,
+"lon": 80.92313,
+"pop": 2472011,
+"admin1": "36"
+},
+{
+"name": "Ajmer",
+"gn": "Ajmer",
+"lat": 26.4521,
+"lon": 74.63867,
+"pop": 542321,
+"admin1": "24"
+},
+{
+"name": "Gandhinagar",
+"gn": "Gandhinagar",
+"lat": 23.21667,
+"lon": 72.68333,
+"pop": 292797,
+"admin1": "09"
+},
+{
+"name": "Kota",
+"gn": "Kota",
+"lat": 25.18254,
+"lon": 75.83907,
+"pop": 1001694,
+"admin1": "24"
+},
+{
+"name": "Chennai",
+"gn": "Chennai",
+"lat": 13.08784,
+"lon": 80.27847,
+"pop": 4681087,
+"admin1": "25"
+},
+{
+"name": "Ghaziabad",
+"gn": "Gh\u0101zi\u0101b\u0101d",
+"lat": 28.66535,
+"lon": 77.43915,
+"pop": 1199191,
+"admin1": "36"
+},
+{
+"name": "Mumbai",
+"gn": "Mumbai",
+"lat": 19.07283,
+"lon": 72.88261,
+"pop": 12691836,
+"admin1": "16"
+},
+{
+"name": "Raipur",
+"gn": "Raipur",
+"lat": 21.23333,
+"lon": 81.63333,
+"pop": 1027264,
+"admin1": "37"
+},
+{
+"name": "Jamnagar",
+"gn": "Jamnagar",
+"lat": 22.47292,
+"lon": 70.06673,
+"pop": 600943,
+"admin1": "09"
+},
+{
+"name": "Ujjain",
+"gn": "Ujjain",
+"lat": 23.18239,
+"lon": 75.77643,
+"pop": 515215,
+"admin1": "35"
+},
+{
+"name": "Nagpur",
+"gn": "Nagpur",
+"lat": 21.14631,
+"lon": 79.08491,
+"pop": 2405665,
+"admin1": "16"
+},
+{
+"name": "Bhavnagar",
+"gn": "Bhavnagar",
+"lat": 21.76287,
+"lon": 72.15331,
+"pop": 605882,
+"admin1": "09"
+},
+{
+"name": "Kanpur",
+"gn": "Kanpur",
+"lat": 26.46523,
+"lon": 80.34975,
+"pop": 2823249,
+"admin1": "36"
+},
+{
+"name": "Nashik",
+"gn": "Nashik",
+"lat": 19.99727,
+"lon": 73.79096,
+"pop": 1486053,
+"admin1": "16"
+},
+{
+"name": "Junagadh",
+"gn": "J\u016bn\u0101gadh",
+"lat": 21.51966,
+"lon": 70.45981,
+"pop": 319462,
+"admin1": "09"
+},
+{
+"name": "Anand",
+"gn": "Anand",
+"lat": 22.55251,
+"lon": 72.9552,
+"pop": 209410,
+"admin1": "09"
+},
+{
+"name": "Bharuch",
+"gn": "Bhar\u016bch",
+"lat": 21.69482,
+"lon": 72.9805,
+"pop": 169007,
+"admin1": "09"
+},
+{
+"name": "Navsari",
+"gn": "Navsari",
+"lat": 20.94237,
+"lon": 72.92467,
+"pop": 171109,
+"admin1": "09"
+},
+{
+"name": "Vapi",
+"gn": "Vapi",
+"lat": 20.37175,
+"lon": 72.90493,
+"pop": 163630,
+"admin1": "09"
+},
+{
+"name": "Mehsana",
+"gn": "Mahes\u0101na",
+"lat": 23.59864,
+"lon": 72.38472,
+"pop": 190753,
+"admin1": "09"
+},
+{
+"name": "Bhuj",
+"gn": "Bhuj",
+"lat": 23.25397,
+"lon": 69.66928,
+"pop": 148834,
+"admin1": "09"
+},
+{
+"name": "Patan",
+"gn": "P\u0101tan",
+"lat": 23.8507,
+"lon": 72.12963,
+"pop": 133737,
+"admin1": "09"
+},
+{
+"name": "Porbandar",
+"gn": "Porbandar",
+"lat": 21.64219,
+"lon": 69.60929,
+"pop": 152760,
+"admin1": "09"
+},
+{
+"name": "Morbi",
+"gn": "Morvi",
+"lat": 22.81731,
+"lon": 70.8377,
+"pop": 210451,
+"admin1": "09"
+},
+{
+"name": "Valsad",
+"gn": "Vals\u0101d",
+"lat": 20.61013,
+"lon": 72.93428,
+"pop": 139764,
+"admin1": "09"
+},
+{
+"name": "Nadiad",
+"gn": "Nadi\u0101d",
+"lat": 22.69385,
+"lon": 72.86157,
+"pop": 225071,
+"admin1": "09"
+},
+{
+"name": "Godhra",
+"gn": "Godhra",
+"lat": 22.77547,
+"lon": 73.61488,
+"pop": 143644,
+"admin1": "09"
+},
+{
+"name": "Palanpur",
+"gn": "P\u0101lanpur",
+"lat": 24.17128,
+"lon": 72.43827,
+"pop": 141592,
+"admin1": "09"
+},
+{
+"name": "Amreli",
+"gn": "Amreli",
+"lat": 21.59983,
+"lon": 71.21169,
+"pop": 117967,
+"admin1": "09"
+},
+{
+"name": "Surendranagar",
+"gn": "Surendranagar",
+"lat": 22.72706,
+"lon": 71.64856,
+"pop": 179628,
+"admin1": "09"
+},
+{
+"name": "Gondal",
+"gn": "Gondal",
+"lat": 21.96074,
+"lon": 70.80255,
+"pop": 112197,
+"admin1": "09"
+},
+{
+"name": "Jalgaon",
+"gn": "Jalgaon",
+"lat": 21.00292,
+"lon": 75.56602,
+"pop": 460228,
+"admin1": "16"
+},
+{
+"name": "Aurangabad",
+"gn": "Aurangabad",
+"lat": 19.87757,
+"lon": 75.34226,
+"pop": 1175116,
+"admin1": "16"
+},
+{
+"name": "Kalyan",
+"gn": "Kaly\u0101n",
+"lat": 19.2437,
+"lon": 73.13554,
+"pop": 1262255,
+"admin1": "16"
+},
+{
+"name": "Varanasi",
+"gn": "Varanasi",
+"lat": 25.31668,
+"lon": 83.01041,
+"pop": 1164404,
+"admin1": "36"
+},
+{
+"name": "Patna",
+"gn": "Patna",
+"lat": 25.59408,
+"lon": 85.13563,
+"pop": 1684297,
+"admin1": "34"
+},
+{
+"name": "Chandigarh",
+"gn": "Chandigarh",
+"lat": 30.73629,
+"lon": 76.7884,
+"pop": 970602,
+"admin1": "05"
+},
+{
+"name": "Ludhiana",
+"gn": "Ludhiana",
+"lat": 30.91204,
+"lon": 75.85379,
+"pop": 1618879,
+"admin1": "23"
+},
+{
+"name": "Amritsar",
+"gn": "Amritsar",
+"lat": 31.62234,
+"lon": 74.87534,
+"pop": 1159227,
+"admin1": "23"
+},
+{
+"name": "Dehradun",
+"gn": "Dehradun",
+"lat": 30.32443,
+"lon": 78.03392,
+"pop": 522081,
+"admin1": "39"
+},
+{
+"name": "Haridwar",
+"gn": "Haridwar",
+"lat": 29.94791,
+"lon": 78.16025,
+"pop": 186079,
+"admin1": "39"
+},
+{
+"name": "Agra",
+"gn": "Agra",
+"lat": 27.18333,
+"lon": 78.01667,
+"pop": 1430055,
+"admin1": "36"
+},
+{
+"name": "Mathura",
+"gn": "Mathura",
+"lat": 27.5035,
+"lon": 77.67215,
+"pop": 330511,
+"admin1": "36"
+},
+{
+"name": "Meerut",
+"gn": "Meerut",
+"lat": 28.98002,
+"lon": 77.70636,
+"pop": 1223184,
+"admin1": "36"
+},
+{
+"name": "Faridabad",
+"gn": "Faridabad",
+"lat": 28.41124,
+"lon": 77.31316,
+"pop": 1414050,
+"admin1": "10"
+},
+{
+"name": "Alwar",
+"gn": "Alwar",
+"lat": 27.56246,
+"lon": 76.625,
+"pop": 322568,
+"admin1": "24"
+},
+{
+"name": "Bhilwara",
+"gn": "Bhilwara",
+"lat": 25.34707,
+"lon": 74.64081,
+"pop": 359483,
+"admin1": "24"
+},
+{
+"name": "Sikar",
+"gn": "S\u012bkar",
+"lat": 27.61206,
+"lon": 75.13996,
+"pop": 244497,
+"admin1": "24"
+},
+{
+"name": "Ganganagar",
+"gn": "Sri Ganganagar",
+"lat": 29.92009,
+"lon": 73.87496,
+"pop": 237780,
+"admin1": "24"
+},
+{
+"name": "Pali",
+"gn": "P\u0101li",
+"lat": 25.77276,
+"lon": 73.32335,
+"pop": 230075,
+"admin1": "24"
+},
+{
+"name": "Barmer",
+"gn": "B\u0101rmer",
+"lat": 25.74572,
+"lon": 71.39211,
+"pop": 96225,
+"admin1": "24"
+},
+{
+"name": "Jaisalmer",
+"gn": "Jaisalmer",
+"lat": 26.91763,
+"lon": 70.90387,
+"pop": 67604,
+"admin1": "24"
+},
+{
+"name": "Chittorgarh",
+"gn": "Chittorgarh",
+"lat": 24.88963,
+"lon": 74.62403,
+"pop": 116406,
+"admin1": "24"
+},
+{
+"name": "Gwalior",
+"gn": "Gwalior",
+"lat": 26.22983,
+"lon": 78.17337,
+"pop": 1054420,
+"admin1": "35"
+},
+{
+"name": "Jabalpur",
+"gn": "Jabalpur",
+"lat": 23.16697,
+"lon": 79.95006,
+"pop": 1081677,
+"admin1": "35"
+},
+{
+"name": "Ratlam",
+"gn": "Ratl\u0101m",
+"lat": 23.33033,
+"lon": 75.04032,
+"pop": 264914,
+"admin1": "35"
+},
+{
+"name": "Dewas",
+"gn": "Dewas",
+"lat": 22.96585,
+"lon": 76.05526,
+"pop": 289550,
+"admin1": "35"
+},
+{
+"name": "Mandsaur",
+"gn": "Mandsaur",
+"lat": 24.07184,
+"lon": 75.06986,
+"pop": 141667,
+"admin1": "35"
+},
+{
+"name": "Neemuch",
+"gn": "Nimach",
+"lat": 24.45949,
+"lon": 74.86625,
+"pop": 128561,
+"admin1": "24"
+},
+{
+"name": "Ranchi",
+"gn": "Ranchi",
+"lat": 23.34316,
+"lon": 85.3094,
+"pop": 1120374,
+"admin1": "38"
+},
+{
+"name": "Bhubaneswar",
+"gn": "Bhubaneswar",
+"lat": 20.27241,
+"lon": 85.83385,
+"pop": 885363,
+"admin1": "21"
+},
+{
+"name": "Guwahati",
+"gn": "Guwahati",
+"lat": 26.1844,
+"lon": 91.7458,
+"pop": 962334,
+"admin1": "03"
+},
+{
+"name": "Kochi",
+"gn": "Kochi",
+"lat": 9.93988,
+"lon": 76.26022,
+"pop": 633553,
+"admin1": "13"
+},
+{
+"name": "Coimbatore",
+"gn": "Coimbatore",
+"lat": 11.00555,
+"lon": 76.96612,
+"pop": 2136916,
+"admin1": "25"
+},
+{
+"name": "Madurai",
+"gn": "Madurai",
+"lat": 9.919,
+"lon": 78.11953,
+"pop": 1465625,
+"admin1": "25"
+},
+{
+"name": "Visakhapatnam",
+"gn": "Rasap\u016bdipalem",
+"lat": 17.73308,
+"lon": 83.31622,
+"pop": 1728128,
+"admin1": "02"
+},
+{
+"name": "Vijayawada",
+"gn": "Vijayawada",
+"lat": 16.50745,
+"lon": 80.6466,
+"pop": 1143232,
+"admin1": "02"
+},
+{
+"name": "Mysuru",
+"gn": "Mysuru",
+"lat": 12.29791,
+"lon": 76.63925,
+"pop": 920550,
+"admin1": "19"
+},
+{
+"name": "Mangaluru",
+"gn": "Mangaluru",
+"lat": 12.91723,
+"lon": 74.85603,
+"pop": 499487,
+"admin1": "19"
+},
+{
+"name": "Hubballi",
+"gn": "Hubballi",
+"lat": 15.34776,
+"lon": 75.13378,
+"pop": 943788,
+"admin1": "19"
+},
+{
+"name": "Belagavi",
+"gn": "Belagavi",
+"lat": 15.85212,
+"lon": 74.50447,
+"pop": 490045,
+"admin1": "19"
+},
+{
+"name": "Goa",
+"gn": "Mormugao",
+"lat": 15.38914,
+"lon": 73.81491,
+"pop": 102345,
+"admin1": "33"
+},
+{
+"name": "Panaji",
+"gn": "Panjim",
+"lat": 15.49574,
+"lon": 73.82624,
+"pop": 70991,
+"admin1": "33"
+},
+{
+"name": "Margao",
+"gn": "Madgaon",
+"lat": 15.27501,
+"lon": 73.95786,
+"pop": 87650,
+"admin1": "33"
+},
+{
+"name": "Kolhapur",
+"gn": "Kolh\u0101pur",
+"lat": 16.69563,
+"lon": 74.23167,
+"pop": 549236,
+"admin1": "16"
+},
+{
+"name": "Solapur",
+"gn": "Sholapur",
+"lat": 17.67152,
+"lon": 75.91044,
+"pop": 997281,
+"admin1": "16"
+},
+{
+"name": "Sangli",
+"gn": "S\u0101ngli",
+"lat": 16.85438,
+"lon": 74.56417,
+"pop": 601214,
+"admin1": "16"
+},
+{
+"name": "Ahmednagar",
+"gn": "Ahilyanagar",
+"lat": 19.09457,
+"lon": 74.73843,
+"pop": 367140,
+"admin1": "16"
+},
+{
+"name": "Amravati",
+"gn": "Amravati",
+"lat": 20.93333,
+"lon": 77.75,
+"pop": 647057,
+"admin1": "16"
+},
+{
+"name": "Akola",
+"gn": "Akola",
+"lat": 20.70957,
+"lon": 76.9981,
+"pop": 428857,
+"admin1": "16"
+},
+{
+"name": "Nanded",
+"gn": "Nanded",
+"lat": 19.16023,
+"lon": 77.31497,
+"pop": 550564,
+"admin1": "16"
+},
+{
+"name": "Latur",
+"gn": "Latur",
+"lat": 18.39721,
+"lon": 76.56784,
+"pop": 382940,
+"admin1": "16"
+}
+]
