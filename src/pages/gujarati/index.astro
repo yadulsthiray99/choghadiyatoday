@@ -3,9 +3,10 @@ import Base from '../../layouts/Base.astro';
 import ChogTable from '../../components/ChogTable.astro';
 import { GU_CITIES, DEFAULT, forCity, label, span, wd, dt, hm, guUrl } from '../../lib/site';
 const c = DEFAULT, r = forCity(c);
+const schema = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Choghadiya today', item: new URL('/', Astro.site).href }, { '@type': 'ListItem', position: 2, name: 'ગુજરાતી ચોઘડિયા', item: new URL('/gujarati/', Astro.site).href }] }];
 const heads = { day: 'દિવસના ચોઘડિયા', night: 'રાત્રિના ચોઘડિયા', name: 'ચોઘડિયું', time: 'સમય', type: 'પ્રકાર', good: 'શુભ', bad: 'અશુભ' };
 ---
-<Base lang="gu" title={`આજના ચોઘડિયા ${dt(r, 'gu')} | Gujarati Choghadiya Today | ગુજરાતી ચોઘડિયા`}
+<Base lang="gu" schema={schema} title={`આજના ચોઘડિયા ${dt(r, 'gu')} | Gujarati Choghadiya Today | ગુજરાતી ચોઘડિયા`}
       description={`આજના ચોઘડિયા ગુજરાતીમાં, ${wd(r, 'gu')} ${dt(r, 'gu')}: અમદાવાદ, સુરત, વડોદરા, રાજકોટ સહિત ${GU_CITIES.length} શહેરો માટે દિવસ અને રાત્રિના ચોઘડિયા અને રાહુકાળ.`}>
   <h1>આજના ચોઘડિયા <span class="hi">| Gujarati choghadiya</span></h1>
   <p class="now-banner" data-now="gu" hidden></p>

@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
 import { CITIES, PAGE_CITIES, forCity, hm, cityUrl } from '../lib/site';
+const schema = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Choghadiya today', item: new URL('/', Astro.site).href }, { '@type': 'ListItem', position: 2, name: 'All cities', item: new URL('/cities/', Astro.site).href }] }];
 const states = [...new Set(PAGE_CITIES.map((c) => c.state))].sort();
 ---
-<Base title={`Choghadiya by City: ${PAGE_CITIES.length} Indian Cities | ChoghadiyaToday`} description={`Today's choghadiya for ${CITIES.length} Indian cities, grouped by state, with each city's sunrise time.`}>
+<Base schema={schema} title={`Choghadiya by City: ${PAGE_CITIES.length} Indian Cities | ChoghadiyaToday`} description={`Today's choghadiya for ${CITIES.length} Indian cities, grouped by state, with each city's sunrise time.`}>
   <p class="crumbs"><a href="/">Choghadiya today</a> › All cities</p>
   <h1>Choghadiya by city</h1>
   <p>Choghadiya starts at local sunrise, so it shifts by several minutes from city to city. Pick the nearest city below, or use the <a href="/">city picker on the home page</a>, which covers {CITIES.length} cities.</p>

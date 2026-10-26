@@ -3,9 +3,10 @@ import Base from '../layouts/Base.astro';
 import { CITIES, forCity, label, span, wd, dt, hm, cityUrl } from '../lib/site';
 const list = ['ahmedabad', 'mumbai', 'jaipur', 'delhi', 'surat', 'pune', 'jodhpur', 'vadodara', 'bengaluru', 'udaipur', 'indore', 'rajkot'].map((s) => CITIES.find((x) => x.slug === s)!);
 const a = forCity(list[0], 1);
+const schema = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Choghadiya today', item: new URL('/', Astro.site).href }, { '@type': 'ListItem', position: 2, name: 'Kal ka choghadiya', item: new URL('/tomorrow/', Astro.site).href }] }];
 const first = (x: typeof a, k: string) => x.day.find((p) => p.k === k) ?? x.night.find((p) => p.k === k)!;
 ---
-<Base title={`Kal Ka Choghadiya ${dt(a)} | Tomorrow's Choghadiya | कल का चौघड़िया`}
+<Base schema={schema} title={`Kal Ka Choghadiya ${dt(a)} | Tomorrow's Choghadiya | कल का चौघड़िया`}
       description={`Tomorrow's choghadiya (${wd(a)}, ${dt(a)}) for Indian cities: day and night periods, shubh muhurat and Rahu Kaal. कल का चौघड़िया ${dt(a, 'hi')}.`}>
   <p class="crumbs"><a href="/">Choghadiya today</a> › Tomorrow</p>
   <h1>Kal ka choghadiya <span class="hi">| कल का चौघड़िया</span></h1>

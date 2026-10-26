@@ -8,8 +8,9 @@ const r = forCity(c), t = forCity(c, 1);
 const best = goodOf(r).slice(0, 4);
 const heads = { day: 'દિવસના ચોઘડિયા (સૂર્યોદયથી સૂર્યાસ્ત)', night: 'રાત્રિના ચોઘડિયા (સૂર્યાસ્તથી સૂર્યોદય)', name: 'ચોઘડિયું', time: 'સમય', type: 'પ્રકાર', good: 'શુભ', bad: 'અશુભ' };
 const others = GU_CITIES.filter((x) => x.slug !== c.slug);
+const schema = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'ગુજરાતી ચોઘડિયા', item: new URL('/gujarati/', Astro.site).href }, { '@type': 'ListItem', position: 2, name: `${c.gu} ચોઘડિયા`, item: new URL(guUrl(c), Astro.site).href }] }];
 ---
-<Base lang="gu" title={`${c.gu} આજના ચોઘડિયા ${dt(r, 'gu')} | ${c.en} Choghadiya in Gujarati`}
+<Base lang="gu" schema={schema} title={`${c.gu} આજના ચોઘડિયા ${dt(r, 'gu')} | ${c.en} Choghadiya in Gujarati`}
       description={`${c.gu} ના આજના ચોઘડિયા, ${wd(r, 'gu')} ${dt(r, 'gu')}: સૂર્યોદય ${hm(r.rise)}, સૂર્યાસ્ત ${hm(r.set)}, રાહુકાળ ${span(r.rahu)}. દિવસ અને રાત્રિના ચોઘડિયા.`}>
   <p class="crumbs"><a href="/gujarati/">ગુજરાતી ચોઘડિયા</a> › {c.gu}</p>
   <h1>{c.gu} ના આજના ચોઘડિયા</h1>
