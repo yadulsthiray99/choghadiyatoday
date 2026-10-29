@@ -6,5 +6,6 @@ export default defineConfig({
   site: 'https://choghadiyatoday.in',
   trailingSlash: 'always',
   build: { format: 'directory' },
-  integrations: [sitemap()],
+  // lastmod = build time: data sites rebuild when data changes, static sites only when edited
+  integrations: [sitemap({ lastmod: new Date() })],
 });
