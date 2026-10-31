@@ -8,6 +8,9 @@ on:
 concurrency:
   group: nightly-build
   cancel-in-progress: false
+permissions:
+  contents: read
+  actions: write
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -36,3 +39,8 @@ jobs:
             echo "::error title=Cloudflare deploy failed::${msg:-see the step log}"
             exit 1
           fi
+      # GitHub pauses schedules after 60 days without repo activity: re-enabling each run prevents that.
+      - name: Keep the schedule alive
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/${{ github.repository }}/actions/workflows/daily.yml/enable"
