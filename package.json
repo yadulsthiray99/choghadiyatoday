@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "build:gated": "astro build && python scripts/quality_check.py * gujarati/*",
+    "build:gated": "astro build && python scripts/quality_check.py \"*\" \"gujarati/*\"",
     "preview": "astro preview",
     "check:quality": "python scripts/quality_check.py when-to-plant-* zone/* frost-dates/*",
     "deploy": "wrangler deploy"

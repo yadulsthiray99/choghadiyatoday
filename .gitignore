@@ -5,4 +5,3 @@ dist/
 *.log
 data/twdb_recent.json
 data/raw/
-src/data/

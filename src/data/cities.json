@@ -1,0 +1,992 @@
+[
+{
+"slug": "ahmedabad",
+"en": "Ahmedabad",
+"hi": "अहमदाबाद",
+"gu": "અમદાવાદ",
+"state": "Gujarat",
+"lat": 23.0258,
+"lon": 72.5873,
+"pop": 6357693
+},
+{
+"slug": "mumbai",
+"en": "Mumbai",
+"hi": "मुंबई",
+"gu": "મુંબઈ",
+"state": "Maharashtra",
+"lat": 19.0728,
+"lon": 72.8826,
+"pop": 12691836
+},
+{
+"slug": "jaipur",
+"en": "Jaipur",
+"hi": "जयपुर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 26.9196,
+"lon": 75.7878,
+"pop": 3046163
+},
+{
+"slug": "delhi",
+"en": "Delhi",
+"hi": "दिल्ली",
+"gu": null,
+"state": "Delhi",
+"lat": 28.6519,
+"lon": 77.2315,
+"pop": 11034555
+},
+{
+"slug": "surat",
+"en": "Surat",
+"hi": "सूरत",
+"gu": "સુરત",
+"state": "Gujarat",
+"lat": 21.1959,
+"lon": 72.8302,
+"pop": 4591246
+},
+{
+"slug": "pune",
+"en": "Pune",
+"hi": "पुणे",
+"gu": null,
+"state": "Maharashtra",
+"lat": 18.5196,
+"lon": 73.8554,
+"pop": 3124458
+},
+{
+"slug": "jodhpur",
+"en": "Jodhpur",
+"hi": "जोधपुर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 26.2684,
+"lon": 73.0059,
+"pop": 1056191
+},
+{
+"slug": "vadodara",
+"en": "Vadodara",
+"hi": "वडोदरा",
+"gu": "વડોદરા",
+"state": "Gujarat",
+"lat": 22.2994,
+"lon": 73.2081,
+"pop": 1822221
+},
+{
+"slug": "bengaluru",
+"en": "Bengaluru",
+"hi": "बेंगलुरु",
+"gu": null,
+"state": "Karnataka",
+"lat": 12.9719,
+"lon": 77.5937,
+"pop": 8495492
+},
+{
+"slug": "udaipur",
+"en": "Udaipur",
+"hi": "उदयपुर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 24.5858,
+"lon": 73.7135,
+"pop": 451100
+},
+{
+"slug": "indore",
+"en": "Indore",
+"hi": "इंदौर",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 22.7179,
+"lon": 75.8333,
+"pop": 1994397
+},
+{
+"slug": "rajkot",
+"en": "Rajkot",
+"hi": "राजकोट",
+"gu": "રાજકોટ",
+"state": "Gujarat",
+"lat": 22.2916,
+"lon": 70.7932,
+"pop": 1390640
+},
+{
+"slug": "kolkata",
+"en": "Kolkata",
+"hi": "कोलकाता",
+"gu": null,
+"state": "West Bengal",
+"lat": 22.5626,
+"lon": 88.363,
+"pop": 4631392
+},
+{
+"slug": "bikaner",
+"en": "Bikaner",
+"hi": "बीकानेर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 28.0176,
+"lon": 73.3149,
+"pop": 644406
+},
+{
+"slug": "bhopal",
+"en": "Bhopal",
+"hi": "भोपाल",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 23.2547,
+"lon": 77.4029,
+"pop": 1798218
+},
+{
+"slug": "gurugram",
+"en": "Gurugram",
+"hi": "गुरुग्राम",
+"gu": null,
+"state": "Haryana",
+"lat": 28.4601,
+"lon": 77.0263,
+"pop": 886519
+},
+{
+"slug": "hyderabad",
+"en": "Hyderabad",
+"hi": "हैदराबाद",
+"gu": null,
+"state": "Telangana",
+"lat": 17.384,
+"lon": 78.4564,
+"pop": 6993262
+},
+{
+"slug": "thane",
+"en": "Thane",
+"hi": "ठाणे",
+"gu": null,
+"state": "Maharashtra",
+"lat": 19.197,
+"lon": 72.9635,
+"pop": 1841488
+},
+{
+"slug": "noida",
+"en": "Noida",
+"hi": "नोएडा",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 28.58,
+"lon": 77.33,
+"pop": 293908
+},
+{
+"slug": "lucknow",
+"en": "Lucknow",
+"hi": "लखनऊ",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 26.8393,
+"lon": 80.9231,
+"pop": 2472011
+},
+{
+"slug": "ajmer",
+"en": "Ajmer",
+"hi": "अजमेर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 26.4521,
+"lon": 74.6387,
+"pop": 542321
+},
+{
+"slug": "gandhinagar",
+"en": "Gandhinagar",
+"hi": "गांधीनगर",
+"gu": "ગાંધીનગર",
+"state": "Gujarat",
+"lat": 23.2167,
+"lon": 72.6833,
+"pop": 292797
+},
+{
+"slug": "kota",
+"en": "Kota",
+"hi": "कोटा",
+"gu": null,
+"state": "Rajasthan",
+"lat": 25.1825,
+"lon": 75.8391,
+"pop": 1001694
+},
+{
+"slug": "chennai",
+"en": "Chennai",
+"hi": "चेन्नई",
+"gu": null,
+"state": "Tamil Nadu",
+"lat": 13.0878,
+"lon": 80.2785,
+"pop": 4681087
+},
+{
+"slug": "ghaziabad",
+"en": "Ghaziabad",
+"hi": "गाजियाबाद",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 28.6654,
+"lon": 77.4391,
+"pop": 1199191
+},
+{
+"slug": "raipur",
+"en": "Raipur",
+"hi": "रायपुर",
+"gu": null,
+"state": "Chhattisgarh",
+"lat": 21.2333,
+"lon": 81.6333,
+"pop": 1027264
+},
+{
+"slug": "jamnagar",
+"en": "Jamnagar",
+"hi": "जामनगर",
+"gu": "જામનગર",
+"state": "Gujarat",
+"lat": 22.4729,
+"lon": 70.0667,
+"pop": 600943
+},
+{
+"slug": "ujjain",
+"en": "Ujjain",
+"hi": "उज्जैन",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 23.1824,
+"lon": 75.7764,
+"pop": 515215
+},
+{
+"slug": "nagpur",
+"en": "Nagpur",
+"hi": "नागपुर",
+"gu": null,
+"state": "Maharashtra",
+"lat": 21.1463,
+"lon": 79.0849,
+"pop": 2405665
+},
+{
+"slug": "bhavnagar",
+"en": "Bhavnagar",
+"hi": "भावनगर",
+"gu": "ભાવનગર",
+"state": "Gujarat",
+"lat": 21.7629,
+"lon": 72.1533,
+"pop": 605882
+},
+{
+"slug": "kanpur",
+"en": "Kanpur",
+"hi": "कानपुर",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 26.4652,
+"lon": 80.3498,
+"pop": 2823249
+},
+{
+"slug": "nashik",
+"en": "Nashik",
+"hi": "नासिक",
+"gu": null,
+"state": "Maharashtra",
+"lat": 19.9973,
+"lon": 73.791,
+"pop": 1486053
+},
+{
+"slug": "junagadh",
+"en": "Junagadh",
+"hi": "जूनागढ़",
+"gu": "જૂનાગઢ",
+"state": "Gujarat",
+"lat": 21.5197,
+"lon": 70.4598,
+"pop": 319462
+},
+{
+"slug": "anand",
+"en": "Anand",
+"hi": "आनंद",
+"gu": "આણંદ",
+"state": "Gujarat",
+"lat": 22.5525,
+"lon": 72.9552,
+"pop": 209410
+},
+{
+"slug": "bharuch",
+"en": "Bharuch",
+"hi": "भरूच",
+"gu": "ભરૂચ",
+"state": "Gujarat",
+"lat": 21.6948,
+"lon": 72.9805,
+"pop": 169007
+},
+{
+"slug": "navsari",
+"en": "Navsari",
+"hi": "नवसारी",
+"gu": "નવસારી",
+"state": "Gujarat",
+"lat": 20.9424,
+"lon": 72.9247,
+"pop": 171109
+},
+{
+"slug": "vapi",
+"en": "Vapi",
+"hi": "वापी",
+"gu": "વાપી",
+"state": "Gujarat",
+"lat": 20.3717,
+"lon": 72.9049,
+"pop": 163630
+},
+{
+"slug": "mehsana",
+"en": "Mehsana",
+"hi": "मेहसाणा",
+"gu": "મહેસાણા",
+"state": "Gujarat",
+"lat": 23.5986,
+"lon": 72.3847,
+"pop": 190753
+},
+{
+"slug": "bhuj",
+"en": "Bhuj",
+"hi": "भुज",
+"gu": "ભુજ",
+"state": "Gujarat",
+"lat": 23.254,
+"lon": 69.6693,
+"pop": 148834
+},
+{
+"slug": "patan",
+"en": "Patan",
+"hi": "पाटन",
+"gu": "પાટણ",
+"state": "Gujarat",
+"lat": 23.8507,
+"lon": 72.1296,
+"pop": 133737
+},
+{
+"slug": "porbandar",
+"en": "Porbandar",
+"hi": "पोरबंदर",
+"gu": "પોરબંદર",
+"state": "Gujarat",
+"lat": 21.6422,
+"lon": 69.6093,
+"pop": 152760
+},
+{
+"slug": "morbi",
+"en": "Morbi",
+"hi": "मोरबी",
+"gu": "મોરબી",
+"state": "Gujarat",
+"lat": 22.8173,
+"lon": 70.8377,
+"pop": 210451
+},
+{
+"slug": "valsad",
+"en": "Valsad",
+"hi": "वलसाड",
+"gu": "વલસાડ",
+"state": "Gujarat",
+"lat": 20.6101,
+"lon": 72.9343,
+"pop": 139764
+},
+{
+"slug": "nadiad",
+"en": "Nadiad",
+"hi": "नडियाद",
+"gu": "નડિયાદ",
+"state": "Gujarat",
+"lat": 22.6939,
+"lon": 72.8616,
+"pop": 225071
+},
+{
+"slug": "godhra",
+"en": "Godhra",
+"hi": "गोधरा",
+"gu": "ગોધરા",
+"state": "Gujarat",
+"lat": 22.7755,
+"lon": 73.6149,
+"pop": 143644
+},
+{
+"slug": "palanpur",
+"en": "Palanpur",
+"hi": "पालनपुर",
+"gu": "પાલનપુર",
+"state": "Gujarat",
+"lat": 24.1713,
+"lon": 72.4383,
+"pop": 141592
+},
+{
+"slug": "amreli",
+"en": "Amreli",
+"hi": "अमरेली",
+"gu": "અમરેલી",
+"state": "Gujarat",
+"lat": 21.5998,
+"lon": 71.2117,
+"pop": 117967
+},
+{
+"slug": "surendranagar",
+"en": "Surendranagar",
+"hi": "सुरेंद्रनगर",
+"gu": "સુરેન્દ્રનગર",
+"state": "Gujarat",
+"lat": 22.7271,
+"lon": 71.6486,
+"pop": 179628
+},
+{
+"slug": "gondal",
+"en": "Gondal",
+"hi": "गोंडल",
+"gu": "ગોંડલ",
+"state": "Gujarat",
+"lat": 21.9607,
+"lon": 70.8025,
+"pop": 112197
+},
+{
+"slug": "jalgaon",
+"en": "Jalgaon",
+"hi": "जलगांव",
+"gu": null,
+"state": "Maharashtra",
+"lat": 21.0029,
+"lon": 75.566,
+"pop": 460228
+},
+{
+"slug": "aurangabad",
+"en": "Aurangabad",
+"hi": "औरंगाबाद",
+"gu": null,
+"state": "Maharashtra",
+"lat": 19.8776,
+"lon": 75.3423,
+"pop": 1175116
+},
+{
+"slug": "kalyan",
+"en": "Kalyan",
+"hi": "कल्याण",
+"gu": null,
+"state": "Maharashtra",
+"lat": 19.2437,
+"lon": 73.1355,
+"pop": 1262255
+},
+{
+"slug": "varanasi",
+"en": "Varanasi",
+"hi": "वाराणसी",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 25.3167,
+"lon": 83.0104,
+"pop": 1164404
+},
+{
+"slug": "patna",
+"en": "Patna",
+"hi": "पटना",
+"gu": null,
+"state": "Bihar",
+"lat": 25.5941,
+"lon": 85.1356,
+"pop": 1684297
+},
+{
+"slug": "chandigarh",
+"en": "Chandigarh",
+"hi": "चंडीगढ़",
+"gu": null,
+"state": "Chandigarh",
+"lat": 30.7363,
+"lon": 76.7884,
+"pop": 970602
+},
+{
+"slug": "ludhiana",
+"en": "Ludhiana",
+"hi": "लुधियाना",
+"gu": null,
+"state": "Punjab",
+"lat": 30.912,
+"lon": 75.8538,
+"pop": 1618879
+},
+{
+"slug": "amritsar",
+"en": "Amritsar",
+"hi": "अमृतसर",
+"gu": null,
+"state": "Punjab",
+"lat": 31.6223,
+"lon": 74.8753,
+"pop": 1159227
+},
+{
+"slug": "dehradun",
+"en": "Dehradun",
+"hi": "देहरादून",
+"gu": null,
+"state": "Uttarakhand",
+"lat": 30.3244,
+"lon": 78.0339,
+"pop": 522081
+},
+{
+"slug": "haridwar",
+"en": "Haridwar",
+"hi": "हरिद्वार",
+"gu": null,
+"state": "Uttarakhand",
+"lat": 29.9479,
+"lon": 78.1603,
+"pop": 186079
+},
+{
+"slug": "agra",
+"en": "Agra",
+"hi": "आगरा",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 27.1833,
+"lon": 78.0167,
+"pop": 1430055
+},
+{
+"slug": "mathura",
+"en": "Mathura",
+"hi": "मथुरा",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 27.5035,
+"lon": 77.6722,
+"pop": 330511
+},
+{
+"slug": "meerut",
+"en": "Meerut",
+"hi": "मेरठ",
+"gu": null,
+"state": "Uttar Pradesh",
+"lat": 28.98,
+"lon": 77.7064,
+"pop": 1223184
+},
+{
+"slug": "faridabad",
+"en": "Faridabad",
+"hi": "फरीदाबाद",
+"gu": null,
+"state": "Haryana",
+"lat": 28.4112,
+"lon": 77.3132,
+"pop": 1414050
+},
+{
+"slug": "alwar",
+"en": "Alwar",
+"hi": "अलवर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 27.5625,
+"lon": 76.625,
+"pop": 322568
+},
+{
+"slug": "bhilwara",
+"en": "Bhilwara",
+"hi": "भीलवाड़ा",
+"gu": null,
+"state": "Rajasthan",
+"lat": 25.3471,
+"lon": 74.6408,
+"pop": 359483
+},
+{
+"slug": "sikar",
+"en": "Sikar",
+"hi": "सीकर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 27.6121,
+"lon": 75.14,
+"pop": 244497
+},
+{
+"slug": "sri-ganganagar",
+"en": "Sri Ganganagar",
+"hi": "श्रीगंगानगर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 29.9201,
+"lon": 73.875,
+"pop": 237780
+},
+{
+"slug": "pali",
+"en": "Pali",
+"hi": "पाली",
+"gu": null,
+"state": "Rajasthan",
+"lat": 25.7728,
+"lon": 73.3234,
+"pop": 230075
+},
+{
+"slug": "barmer",
+"en": "Barmer",
+"hi": "बाड़मेर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 25.7457,
+"lon": 71.3921,
+"pop": 96225
+},
+{
+"slug": "jaisalmer",
+"en": "Jaisalmer",
+"hi": "जैसलमेर",
+"gu": null,
+"state": "Rajasthan",
+"lat": 26.9176,
+"lon": 70.9039,
+"pop": 67604
+},
+{
+"slug": "chittorgarh",
+"en": "Chittorgarh",
+"hi": "चित्तौड़गढ़",
+"gu": null,
+"state": "Rajasthan",
+"lat": 24.8896,
+"lon": 74.624,
+"pop": 116406
+},
+{
+"slug": "gwalior",
+"en": "Gwalior",
+"hi": "ग्वालियर",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 26.2298,
+"lon": 78.1734,
+"pop": 1054420
+},
+{
+"slug": "jabalpur",
+"en": "Jabalpur",
+"hi": "जबलपुर",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 23.167,
+"lon": 79.9501,
+"pop": 1081677
+},
+{
+"slug": "ratlam",
+"en": "Ratlam",
+"hi": "रतलाम",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 23.3303,
+"lon": 75.0403,
+"pop": 264914
+},
+{
+"slug": "dewas",
+"en": "Dewas",
+"hi": "देवास",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 22.9658,
+"lon": 76.0553,
+"pop": 289550
+},
+{
+"slug": "mandsaur",
+"en": "Mandsaur",
+"hi": "मंदसौर",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 24.0718,
+"lon": 75.0699,
+"pop": 141667
+},
+{
+"slug": "neemuch",
+"en": "Neemuch",
+"hi": "नीमच",
+"gu": null,
+"state": "Madhya Pradesh",
+"lat": 24.4595,
+"lon": 74.8662,
+"pop": 128561
+},
+{
+"slug": "ranchi",
+"en": "Ranchi",
+"hi": "रांची",
+"gu": null,
+"state": "Jharkhand",
+"lat": 23.3432,
+"lon": 85.3094,
+"pop": 1120374
+},
+{
+"slug": "bhubaneswar",
+"en": "Bhubaneswar",
+"hi": "भुवनेश्वर",
+"gu": null,
+"state": "Odisha",
+"lat": 20.2724,
+"lon": 85.8338,
+"pop": 885363
+},
+{
+"slug": "guwahati",
+"en": "Guwahati",
+"hi": "गुवाहाटी",
+"gu": null,
+"state": "Assam",
+"lat": 26.1844,
+"lon": 91.7458,
+"pop": 962334
+},
+{
+"slug": "kochi",
+"en": "Kochi",
+"hi": "कोच्चि",
+"gu": null,
+"state": "Kerala",
+"lat": 9.9399,
+"lon": 76.2602,
+"pop": 633553
+},
+{
+"slug": "coimbatore",
+"en": "Coimbatore",
+"hi": "कोयंबटूर",
+"gu": null,
+"state": "Tamil Nadu",
+"lat": 11.0055,
+"lon": 76.9661,
+"pop": 2136916
+},
+{
+"slug": "madurai",
+"en": "Madurai",
+"hi": "मदुरै",
+"gu": null,
+"state": "Tamil Nadu",
+"lat": 9.919,
+"lon": 78.1195,
+"pop": 1465625
+},
+{
+"slug": "visakhapatnam",
+"en": "Visakhapatnam",
+"hi": "विशाखापत्तनम",
+"gu": null,
+"state": "Andhra Pradesh",
+"lat": 17.7331,
+"lon": 83.3162,
+"pop": 1728128
+},
+{
+"slug": "vijayawada",
+"en": "Vijayawada",
+"hi": "विजयवाड़ा",
+"gu": null,
+"state": "Andhra Pradesh",
+"lat": 16.5074,
+"lon": 80.6466,
+"pop": 1143232
+},
+{
+"slug": "mysuru",
+"en": "Mysuru",
+"hi": "मैसूरु",
+"gu": null,
+"state": "Karnataka",
+"lat": 12.2979,
+"lon": 76.6393,
+"pop": 920550
+},
+{
+"slug": "mangaluru",
+"en": "Mangaluru",
+"hi": "मंगलुरु",
+"gu": null,
+"state": "Karnataka",
+"lat": 12.9172,
+"lon": 74.856,
+"pop": 499487
+},
+{
+"slug": "hubballi",
+"en": "Hubballi",
+"hi": "हुबली",
+"gu": null,
+"state": "Karnataka",
+"lat": 15.3478,
+"lon": 75.1338,
+"pop": 943788
+},
+{
+"slug": "belagavi",
+"en": "Belagavi",
+"hi": "बेलगावी",
+"gu": null,
+"state": "Karnataka",
+"lat": 15.8521,
+"lon": 74.5045,
+"pop": 490045
+},
+{
+"slug": "panaji",
+"en": "Panaji",
+"hi": "पणजी",
+"gu": null,
+"state": "Goa",
+"lat": 15.4957,
+"lon": 73.8262,
+"pop": 70991
+},
+{
+"slug": "margao",
+"en": "Margao",
+"hi": "मडगांव",
+"gu": null,
+"state": "Goa",
+"lat": 15.275,
+"lon": 73.9579,
+"pop": 87650
+},
+{
+"slug": "kolhapur",
+"en": "Kolhapur",
+"hi": "कोल्हापुर",
+"gu": null,
+"state": "Maharashtra",
+"lat": 16.6956,
+"lon": 74.2317,
+"pop": 549236
+},
+{
+"slug": "solapur",
+"en": "Solapur",
+"hi": "सोलापुर",
+"gu": null,
+"state": "Maharashtra",
+"lat": 17.6715,
+"lon": 75.9104,
+"pop": 997281
+},
+{
+"slug": "sangli",
+"en": "Sangli",
+"hi": "सांगली",
+"gu": null,
+"state": "Maharashtra",
+"lat": 16.8544,
+"lon": 74.5642,
+"pop": 601214
+},
+{
+"slug": "ahmednagar",
+"en": "Ahmednagar",
+"hi": "अहमदनगर",
+"gu": null,
+"state": "Maharashtra",
+"lat": 19.0946,
+"lon": 74.7384,
+"pop": 367140
+},
+{
+"slug": "amravati",
+"en": "Amravati",
+"hi": "अमरावती",
+"gu": null,
+"state": "Maharashtra",
+"lat": 20.9333,
+"lon": 77.75,
+"pop": 647057
+},
+{
+"slug": "akola",
+"en": "Akola",
+"hi": "अकोला",
+"gu": null,
+"state": "Maharashtra",
+"lat": 20.7096,
+"lon": 76.9981,
+"pop": 428857
+},
+{
+"slug": "nanded",
+"en": "Nanded",
+"hi": "नांदेड़",
+"gu": null,
+"state": "Maharashtra",
+"lat": 19.1602,
+"lon": 77.315,
+"pop": 550564
+},
+{
+"slug": "latur",
+"en": "Latur",
+"hi": "लातूर",
+"gu": null,
+"state": "Maharashtra",
+"lat": 18.3972,
+"lon": 76.5678,
+"pop": 382940
+}
+]
