@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES, forCity, horaFor, planet, wd, dt, hm, span, bc, faq } from '../lib/site';
+import { HORA_INFO } from '../data/guide';
+import { CHALDEAN, DAY_LORD, WEEKDAY } from '../lib/chog.mjs';
+const delhi = CITIES.find((c) => c.slug === 'delhi')!;
+const r = forCity(delhi), h = horaFor(delhi);
+const dayH = Math.round((r.set - r.rise) / 12), nightH = Math.round((r.nextRise - r.set) / 12);
+const good = ['jupiter', 'venus', 'mercury', 'moon'];
+const qs: [string, string][] = [
+  ['What is hora in astrology?', 'A hora is one twelfth of the day (sunrise to sunset) or of the night (sunset to next sunrise). Each hora is ruled by one of the seven classical planets, and its ruler is used to choose a suitable hour for a task.'],
+  ['How is today\'s first hora decided?', `The first hora after sunrise belongs to the planet that rules the weekday: Sun on Sunday, Moon on Monday, Mars on Tuesday, Mercury on Wednesday, Jupiter on Thursday, Venus on Friday and Saturn on Saturday. Today (${wd(r)}) it is ${planet(DAY_LORD[r.wd])}.`],
+  ['Which hora is best?', 'Jupiter (Guru) hora is traditionally considered the most auspicious, followed by Venus, Mercury and Moon. Saturn and Mars horas are usually avoided for new beginnings; the Sun hora is favoured for government work.'],
+  ['Is a hora exactly one hour?', `Only on the equinoxes. Today in Delhi a day hora lasts ${dayH} minutes and a night hora ${nightH} minutes, because daylight is shorter or longer than 12 hours.`],
+];
+const schema = [bc(Astro.site, [['Choghadiya today', '/'], ['Hora today', '/hora-today/']]), faq(qs)];
+const order = CHALDEAN.map((k) => planet(k)).join(' → ');
+---
+<Base schema={schema} title={`Hora Today ${dt(r)}: Hora Chart with Timings | आज का होरा`}
+      description={`Today's hora (${wd(r)}, ${dt(r)}): all 24 day and night horas with start times for your city, the planet ruling each hour and what it is traditionally good for.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › Hora today</p>
+  <h1>Hora today <span class="hi">| आज का होरा</span></h1>
+  <p class="answer"><strong>{wd(r)}, {dt(r)}</strong>: the day begins with the <strong>{planet(h[0].k)} hora</strong> ({planet(h[0].k, 'hi')}) at sunrise. In Delhi, sunrise is {hm(r.rise)} and each day hora lasts {dayH} minutes; the night horas from sunset at {hm(r.set)} last {nightH} minutes. Choose your city for exact times.</p>
+  <p><label>City: <select id="hora-city">{[...CITIES].sort((a, b) => a.en.localeCompare(b.en)).map((c) => <option value={c.slug} data-lat={c.lat} data-lon={c.lon} selected={c.slug === 'delhi'}>{c.en} — {c.hi}</option>)}</select></label></p>
+  <p class="now-banner" id="hora-now" hidden></p>
+
+  <h2 id="hora-title">Hora chart today: Delhi</h2>
+  <div class="scroll"><table class="ct" id="hora-table"><tbody>
+    <tr><th>#</th><th>Hora</th><th class="num">Time</th><th>Traditionally good for</th></tr>
+    {h.map((p, i) => <tr class={good.includes(p.k) ? 'g' : 'b'} data-from={Math.round(p.from)} data-to={Math.round(p.to)}>
+      <td>{i < 12 ? `Day ${i + 1}` : `Night ${i - 11}`}</td><td><strong>{planet(p.k)}</strong> <span class="hi">{planet(p.k, 'hi')}</span></td><td class="num">{span(p)}</td><td class="muted">{HORA_INFO[p.k].use.split(', ').slice(0, 2).join(', ')}</td></tr>)}
+  </tbody></table></div>
+  <p class="muted">Green rows: Jupiter, Venus, Mercury and Moon horas, traditionally favourable. Red: Sun, Mars and Saturn, used only for the specific work they rule.</p>
+
+  <h2>What each hora is traditionally used for</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>Planet</th><th>Good for</th><th>Usually avoided for</th></tr>
+    {CHALDEAN.map((k) => <tr><td><strong>{planet(k)}</strong><br /><span class="hi">{planet(k, 'hi')}</span></td><td>{HORA_INFO[k].use}</td><td>{HORA_INFO[k].avoid}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>How hora is calculated</h2>
+  <p>Hora (होरा) is the root of the English word "hour". Daylight from sunrise to sunset is split into 12 equal horas and the night from sunset to the next sunrise into another 12. The planets rule them in a fixed sequence, the Chaldean order: {order}. The sequence never breaks, so after 24 horas it lands on the planet of the next weekday. That is how the weekdays got their order: Sunday (Sun), Monday (Moon), Tuesday (Mars), Wednesday (Mercury), Thursday (Jupiter), Friday (Venus), Saturday (Saturn).</p>
+  <div class="scroll"><table><tbody>
+    <tr><th>Weekday</th><th>First day hora</th><th>First night hora</th></tr>
+    {WEEKDAY.en.map((w, i) => { const s = CHALDEAN.indexOf(DAY_LORD[i]); return <tr><td>{w} <span class="hi">{WEEKDAY.hi[i]}</span></td><td>{planet(DAY_LORD[i])}</td><td>{planet(CHALDEAN[(s + 12) % 7])}</td></tr>; })}
+  </tbody></table></div>
+
+  <h2>Hora and choghadiya</h2>
+  <p>Both systems split the day by sunrise and sunset and use the same planetary order. A <a href="/what-is-choghadiya/">choghadiya</a> is one eighth of the day (about 90 minutes); a hora is one twelfth (about an hour). Gujarat and Rajasthan mostly use choghadiya, while hora is popular in South India and with astrologers who want a finer division. Many people combine them, for example starting in a Jupiter hora that also falls in a <a href="/shubh-choghadiya/">Shubh choghadiya</a> and outside <a href="/rahu-kaal-today/">Rahu Kaal</a>.</p>
+
+  <h2>Frequently asked questions</h2>
+  {qs.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+</Base>
+<script>
+  import { choghadiya, horas, todayIST, minutesNowIST, hm, PLANETS } from '../lib/chog.mjs';
+  const GOOD = ['jupiter', 'venus', 'mercury', 'moon'];
+  const sel = document.querySelector<HTMLSelectElement>('#hora-city')!;
+  function render() {
+    const o = sel.selectedOptions[0];
+    const [y, m, d] = todayIST();
+    const r = choghadiya(y, m, d, +o.dataset.lat!, +o.dataset.lon!);
+    const h = horas(r);
+    const rows = document.querySelectorAll<HTMLTableRowElement>('#hora-table tr[data-from]');
+    rows.forEach((tr, i) => {
+      const p = h[i]; const n = (PLANETS as any)[p.k];
+      tr.className = GOOD.includes(p.k) ? 'g' : 'b';
+      tr.dataset.from = String(Math.round(p.from)); tr.dataset.to = String(Math.round(p.to));
+      tr.children[1].innerHTML = `<strong>${n.en}</strong> <span class="hi">${n.hi}</span>`;
+      tr.children[2].textContent = `${hm(p.from)} – ${hm(p.to)}`;
+    });
+    document.querySelector('#hora-title')!.textContent = `Hora chart today: ${o.textContent!.split(' — ')[0]}`;
+    const now = minutesNowIST();
+    let cur: { k: string; to: number } | null = null;
+    rows.forEach((tr, i) => { const on = now >= +tr.dataset.from! && now < +tr.dataset.to!; tr.classList.toggle('now', on); if (on) cur = h[i]; });
+    if (!cur && now < r.rise) { // before sunrise we are still in last night's horas
+      const q = new Date(Date.UTC(y, m - 1, d - 1));
+      const py = horas(choghadiya(q.getUTCFullYear(), q.getUTCMonth() + 1, q.getUTCDate(), +o.dataset.lat!, +o.dataset.lon!));
+      cur = py.find((p) => now + 1440 >= p.from && now + 1440 < p.to) ?? null;
+    }
+    const b = document.querySelector<HTMLElement>('#hora-now')!;
+    if (cur) { const c = cur as { k: string; to: number }; const n = (PLANETS as any)[c.k]; b.innerHTML = `<b>Now:</b> ${n.en} hora (${n.hi}) until ${hm(c.to)}`; b.hidden = false; } else b.hidden = true;
+  }
+  sel.addEventListener('change', render);
+  render(); setInterval(render, 60000);
+</script>

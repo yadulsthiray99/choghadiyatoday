@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES, MAJOR, forCity, label, isGood, span, wd, dt, hm, cityUrl, bc, faq } from '../lib/site';
+import { NAMES } from '../lib/chog.mjs';
+const delhi = CITIES.find((c) => c.slug === 'delhi')!;
+const r = forCity(delhi);
+const nightLen = Math.round(r.nightLen);
+const goodNight = r.night.filter((p) => ['amrit', 'shubh', 'labh'].includes(p.k));
+const rows = MAJOR.slice(0, 10).map((c) => ({ c, q: forCity(c) }));
+const qs: [string, string][] = [
+  ['What is raat ka choghadiya?', 'Raat ka choghadiya (night choghadiya) divides the time from sunset to the next sunrise into eight equal parts, just as the day choghadiya divides sunrise to sunset. Each part has one of the seven choghadiya qualities.'],
+  ['When does the night choghadiya start?', `At local sunset. In Delhi today that is ${hm(r.set)}, and the night choghadiya runs until sunrise tomorrow at ${hm(r.nextRise)}.`],
+  ['Is the night order the same as the day order?', 'No. The night choghadiya follow their own sequence, and the first night choghadiya of each weekday is different from the first day choghadiya. For example on Sunday the day starts with Udveg but the night starts with Shubh.'],
+];
+const schema = [bc(Astro.site, [['Choghadiya today', '/'], ['Raat ka choghadiya', '/raat-ka-choghadiya/']]), faq(qs)];
+---
+<Base schema={schema} title={`Raat Ka Choghadiya ${dt(r)}: Night Choghadiya Today | रात का चौघड़िया`}
+      description={`Tonight's choghadiya (${wd(r)}, ${dt(r)}): the eight night periods from sunset to sunrise for 10 cities, with the good times for puja and travel after dark.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › Raat ka choghadiya</p>
+  <h1>Raat ka choghadiya <span class="hi">| रात का चौघड़िया</span></h1>
+  <p class="answer"><strong>{wd(r)} night, {dt(r)}</strong>: in Delhi the night choghadiya begins at sunset <strong>{hm(r.set)}</strong> with <strong>{label(r.night[0].k)}</strong> and each period lasts {nightLen} minutes. Good periods tonight: {goodNight.map((p, i) => <>{i ? ', ' : ''}<strong>{label(p.k)}</strong> {span(p)}</>)}.</p>
+
+  <h2>Tonight's choghadiya in Delhi</h2>
+  <div class="scroll"><table class="ct"><tbody>
+    <tr><th>#</th><th>Choghadiya</th><th class="num">Time</th><th>Type</th></tr>
+    {r.night.map((p, i) => <tr class={isGood(p.k) ? 'g' : 'b'}><td>{i + 1}</td><td><strong>{label(p.k)}</strong> <span class="hi">{label(p.k, 'hi')}</span></td><td class="num">{span(p)}</td><td>{isGood(p.k) ? 'Good' : 'Avoid'}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>Night choghadiya in other cities</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>City</th><th class="num">Sunset</th><th>Good periods tonight</th></tr>
+    {rows.map(({ c, q }) => <tr><td><a href={cityUrl(c)}>{c.en}</a> <span class="hi">{c.hi}</span></td><td class="num">{hm(q.set)}</td><td>{q.night.filter((p) => ['amrit', 'shubh', 'labh'].includes(p.k)).map((p) => `${label(p.k)} ${hm(p.from)}`).join(' · ')}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>Din and raat: how the two halves differ</h2>
+  <p>The choghadiya day starts at sunrise, not at midnight. The eight <strong>din</strong> (day) choghadiya cover sunrise to sunset, and the eight <strong>raat</strong> (night) choghadiya cover sunset to the next morning's sunrise. In winter the nights are long, so each night choghadiya is longer than each day one; in summer it is the reverse. Today in Delhi a day choghadiya lasts {Math.round(r.dayLen)} minutes and a night choghadiya {nightLen} minutes.</p>
+  <p>A practical consequence: if you check the choghadiya at 2 AM, you are still in the <em>previous</em> date's night choghadiya, because the new day only begins at sunrise. The tables on this site handle that automatically.</p>
+
+  <h2>When people use the night choghadiya</h2>
+  <ul>
+    <li><strong>Diwali Lakshmi puja and Chopda Pujan</strong>, which are done after sunset, usually in a Labh, Amrit or Shubh night choghadiya.</li>
+    <li><strong>Overnight journeys</strong>, where families like to set out in an Amrit or Chal period.</li>
+    <li><strong>Late-evening functions</strong> such as engagement ceremonies in Gujarat and Rajasthan.</li>
+  </ul>
+  <p>The meaning of each period is the same at night as in the day: see <a href="/amrit-choghadiya/">Amrit</a>, <a href="/shubh-choghadiya/">Shubh</a>, <a href="/labh-choghadiya/">Labh</a>, <a href="/chal-choghadiya/">Chal</a>, <a href="/udveg-choghadiya/">Udveg</a>, <a href="/rog-choghadiya/">Rog</a> and <a href="/kaal-choghadiya/">Kaal</a>.</p>
+
+  <h2>Frequently asked questions</h2>
+  {qs.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+</Base>

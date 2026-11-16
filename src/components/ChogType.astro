@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import { TYPES } from '../data/guide';
+import { CITIES, MAJOR, forCity, label, span, wd, dt, hm, cityUrl, planet, bc, faq } from '../lib/site';
+import { WEEKDAY, DAY_SEQ, NIGHT_SEQ, NAMES } from '../lib/chog.mjs';
+interface Props { slug: string }
+const T = TYPES.find((x) => x.slug === Astro.props.slug)!;
+const N = (NAMES as any)[T.k];
+const delhi = CITIES.find((c) => c.slug === 'delhi')!;
+const r = forCity(delhi);
+const today = [...r.day.map((p) => ({ ...p, night: false })), ...r.night.map((p) => ({ ...p, night: true }))].filter((p) => p.k === T.k);
+// positions (1-8) of this choghadiya on each weekday, day and night
+const pos = WEEKDAY.en.map((w, i) => ({ w, hi: WEEKDAY.hi[i], day: DAY_SEQ(i).map((k: string, j: number) => k === T.k ? j + 1 : 0).filter(Boolean), night: NIGHT_SEQ(i).map((k: string, j: number) => k === T.k ? j + 1 : 0).filter(Boolean) }));
+const ord = (n: number) => `${n}${['st', 'nd', 'rd'][n - 1] ?? 'th'}`;
+const cities = MAJOR.slice(0, 10).map((c) => { const q = forCity(c); return { c, day: q.day.filter((p) => p.k === T.k), night: q.night.filter((p) => p.k === T.k) }; });
+const verdict = { best: 'the most auspicious', good: 'auspicious', neutral: 'neutral (usable for travel and routine work)', avoid: 'inauspicious for new work' }[T.nature];
+const qs: [string, string][] = [
+  [`What is ${N.en} choghadiya?`, `${N.en} (${N.hi}, ${N.gu}) is one of the seven choghadiya. It means "${N.mean.split(':')[0]}", is ruled by ${planet(T.planet)} and is considered ${verdict}.`],
+  [`When is ${N.en} choghadiya today?`, `In Delhi on ${wd(r)} ${dt(r)}: ${today.map((p) => `${span(p)} (${p.night ? 'night' : 'day'})`).join(' and ') || 'not today'}. Times differ by city; see the table on this page.`],
+  [`Is ${N.en} choghadiya good?`, T.short],
+];
+const schema = [bc(Astro.site, [['Choghadiya today', '/'], ['What is choghadiya', '/what-is-choghadiya/'], [`${N.en} choghadiya`, `/${T.slug}/`]]), faq(qs)];
+---
+<Base schema={schema} title={`${N.en} Choghadiya: Meaning, Time Today and Uses | ${N.hi} चौघड़िया`}
+      description={`${N.en} choghadiya (${N.hi}) meaning: ${T.short} Ruled by ${planet(T.planet)}. Today's ${N.en} times for 10 cities and where it falls on each weekday.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › <a href="/what-is-choghadiya/">What is choghadiya</a> › {N.en}</p>
+  <h1>{N.en} choghadiya <span class="hi">| {N.hi} चौघड़िया</span></h1>
+  <p class="answer"><strong>{N.en}</strong> ({N.hi}, {N.gu}) is {verdict}. {T.short} It is ruled by <strong>{planet(T.planet)}</strong> ({planet(T.planet, 'hi')}). Today in Delhi: {today.length ? today.map((p, i) => <>{i ? ' and ' : ''}<strong>{span(p)}</strong> ({p.night ? 'night' : 'day'})</>) : 'not today'}.</p>
+  {T.intro.map((p) => <p>{p}</p>)}
+  <p class="hi">{T.hiLine}</p>
+
+  <h2>Traditionally good for</h2>
+  <ul>{T.goodFor.map((g) => <li>{g}</li>)}</ul>
+  <h2>Traditionally avoided for</h2>
+  <ul>{T.avoidFor.map((g) => <li>{g}</li>)}</ul>
+  <p class="note">{T.note}</p>
+
+  <h2>{N.en} choghadiya today by city</h2>
+  <p>{wd(r)}, {dt(r)}. Each choghadiya is one eighth of local daylight or night, so the time shifts with each city's sunrise.</p>
+  <div class="scroll"><table><tbody>
+    <tr><th>City</th><th class="num">Day</th><th class="num">Night</th></tr>
+    {cities.map(({ c, day, night }) => <tr><td><a href={cityUrl(c)}>{c.en}</a> <span class="hi">{c.hi}</span></td><td class="num">{day.map((p) => span(p)).join(', ') || '—'}</td><td class="num">{night.map((p) => span(p)).join(', ') || '—'}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>Where {N.en} falls on each weekday</h2>
+  <p>The day and the night each have eight choghadiya. This table shows which of the eight is {N.en}; with a 6 AM sunrise the 1st day choghadiya runs 6:00–7:30, the 2nd 7:30–9:00 and so on.</p>
+  <div class="scroll"><table><tbody>
+    <tr><th>Weekday</th><th>Day choghadiya</th><th>Night choghadiya</th></tr>
+    {pos.map((p) => <tr><td>{p.w} <span class="hi">{p.hi}</span></td><td>{p.day.map(ord).join(' and ') || '—'}</td><td>{p.night.map(ord).join(' and ') || '—'}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>The other choghadiya</h2>
+  <ul class="grid">{TYPES.filter((x) => x.slug !== T.slug).map((x) => <li><a href={`/${x.slug}/`}>{(NAMES as any)[x.k].en} <span class="hi">{(NAMES as any)[x.k].hi}</span></a></li>)}</ul>
+  <p><a href="/">Today's full choghadiya</a> · <a href="/shubh-muhurat-today/">Shubh muhurat today</a> · <a href="/rahu-kaal-today/">Rahu Kaal today</a></p>
+
+  <h2>Frequently asked questions</h2>
+  {qs.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+</Base>

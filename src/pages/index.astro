@@ -30,5 +30,7 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'WebSite', name: 'C
     <tr><th>City</th><th class="num">Sunrise</th><th class="num">First Amrit</th><th class="num">First Shubh</th><th class="num">First Labh</th><th class="num">Rahu Kaal</th></tr>
     {top.map(({ x, r: q }) => <tr><td><a href={cityUrl(x)}>{x.en}</a> <span class="hi">{x.hi}</span></td><td class="num">{hm(q.rise)}</td><td class="num">{hm(first(q, 'amrit').from)}</td><td class="num">{hm(first(q, 'shubh').from)}</td><td class="num">{hm(first(q, 'labh').from)}</td><td class="num">{span(q.rahu)}</td></tr>)}
   </tbody></table></div>
+  <h2>More for today</h2>
+  <ul class="grid"><li><a href="/rahu-kaal-today/">Rahu Kaal today</a></li><li><a href="/shubh-muhurat-today/">Shubh muhurat today</a></li><li><a href="/hora-today/">Hora chart today</a></li><li><a href="/abhijit-muhurat-today/">Abhijit muhurat</a></li><li><a href="/raat-ka-choghadiya/">Raat ka choghadiya</a></li><li><a href="/tomorrow/">Kal ka choghadiya</a></li></ul>
   <p><a href="/cities/">All {CITIES.length} cities</a> · <a href="/tomorrow/">Kal ka choghadiya (tomorrow)</a> · <a href="/gujarati/">ગુજરાતી ચોઘડિયા</a> · <a href="/what-is-choghadiya/">What is choghadiya?</a></p>
 </Base>

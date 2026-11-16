@@ -12,7 +12,7 @@ const RAHU = [8, 2, 7, 5, 6, 4, 3];
   <h2>The seven choghadiya and what they mean</h2>
   <table><tbody>
     <tr><th>Choghadiya</th><th>Hindi / Gujarati</th><th>Quality</th></tr>
-    {['amrit', 'shubh', 'labh', 'chal', 'udveg', 'rog', 'kaal'].map((k) => <tr><td><strong>{N[k].en}</strong></td><td>{N[k].hi} / {N[k].gu}</td><td>{N[k].good ? 'Good' : 'Avoid'}: {N[k].mean}</td></tr>)}
+    {['amrit', 'shubh', 'labh', 'chal', 'udveg', 'rog', 'kaal'].map((k) => <tr><td><strong><a href={`/${k}-choghadiya/`}>{N[k].en}</a></strong></td><td>{N[k].hi} / {N[k].gu}</td><td>{N[k].good ? 'Good' : 'Avoid'}: {N[k].mean}</td></tr>)}
   </tbody></table>
   <h2>Why times differ between cities</h2>
   <p>Because each choghadiya is one-eighth of the actual day or night, its length changes with the season and its start changes with your city's sunrise. In winter a day choghadiya can be under 80 minutes; in summer, over 100. A city in western India such as Ahmedabad sees sunrise around 15–40 minutes after Kolkata, so every period starts later. That is why a single "India" table is never exactly right.</p>
@@ -23,7 +23,9 @@ const RAHU = [8, 2, 7, 5, 6, 4, 3];
     {DAY.map((row, i) => <tr><td>{WEEKDAY.en[i]}</td>{row.map((k) => <td class={N[k].good ? 'up' : 'down'}>{N[k].en}</td>)}</tr>)}
   </tbody></table></div>
   <h2>Rahu Kaal</h2>
-  <p>Rahu Kaal is one of the eight daytime parts, different for each weekday, during which new work is traditionally avoided: {WEEKDAY.en.map((w, i) => `${w} part ${RAHU[i]}`).join(', ')}. With a 6:00 AM sunrise and 6:00 PM sunset that gives the familiar Monday 7:30–9:00, Saturday 9:00–10:30 and so on, but the real time moves with sunrise. Every city page shows today's Rahu Kaal for that city.</p>
+  <p>Rahu Kaal is one of the eight daytime parts, different for each weekday, during which new work is traditionally avoided: {WEEKDAY.en.map((w, i) => `${w} part ${RAHU[i]}`).join(', ')}. With a 6:00 AM sunrise and 6:00 PM sunset that gives the familiar Monday 7:30–9:00, Saturday 9:00–10:30 and so on, but the real time moves with sunrise. Every city page shows today's Rahu Kaal for that city, and the <a href="/rahu-kaal-today/">Rahu Kaal today</a> page lists all cities, with Yamaganda and Gulika Kaal.</p>
+  <h2>Choghadiya, hora and muhurat</h2>
+  <p>Choghadiya is one of several ways of dividing the day. <a href="/hora-today/">Hora</a> splits daylight into twelve parts ruled by the planets in the same order; <a href="/abhijit-muhurat-today/">Abhijit muhurat</a> is the midday part of a fifteen-fold division. For a quick good time to start everyday work, see <a href="/shubh-muhurat-today/">shubh muhurat today</a>, which combines them.</p>
   <h2>How this site calculates</h2>
   <p>Sunrise and sunset are computed for each city's coordinates with the NOAA solar equations, using the standard horizon of −0.833° for refraction and the sun's radius. Panchangs that use a different sunrise convention may show times one or two minutes apart. For marriages, griha pravesh and other major ceremonies, always confirm the muhurat with a priest or a full panchang.</p>
 </Base>

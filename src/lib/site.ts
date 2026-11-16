@@ -1,5 +1,6 @@
 import cities from '../data/cities.json';
-import { choghadiya, todayIST, NAMES, WEEKDAY, hm, dateText } from './chog.mjs';
+import { choghadiya, todayIST, NAMES, WEEKDAY, hm, dateText, kaals, horas, PLANETS } from './chog.mjs';
+export { kaals, horas, PLANETS };
 
 export type City = (typeof cities)[number];
 export const CITIES = cities as City[];
@@ -33,3 +34,12 @@ export const cityUrl = (c: City) => `/${c.slug}/`;
 export const guUrl = (c: City) => `/gujarati/${c.slug}/`;
 export const near = (c: City, n = 8) => PAGE_CITIES.filter((x) => x.slug !== c.slug && x.state === c.state).slice(0, n);
 export { hm, NAMES };
+export const kaalFor = (c: City, offset = 0) => kaals(forCity(c, offset) as any) as { rahu: { from: number; to: number }; yama: { from: number; to: number }; gulika: { from: number; to: number }; abhijit: { from: number; to: number; wednesday: boolean } };
+export const horaFor = (c: City, offset = 0) => horas(forCity(c, offset) as any) as { k: string; night: boolean; from: number; to: number }[];
+export const planet = (k: string, lang: 'en' | 'hi' | 'gu' = 'en') => (PLANETS as any)[k][lang];
+export const bc = (site: URL | undefined, items: [string, string][]) => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: items.map(([name, path], i) => ({ '@type': 'ListItem', position: i + 1, name, item: new URL(path, site).href })) });
+export const faq = (qs: [string, string][]) => ({ '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: qs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
+// The cities shown in all-India tables: every city with its own page, by population
+export const MAJOR = [...PAGE_CITIES].sort((a, b) => (b.pop || 0) - (a.pop || 0));

@@ -60,6 +60,43 @@ export function choghadiya(y, m, d, lat, lon) {
     rahu: { from: t.rise + r * dayLen, to: t.rise + (r + 1) * dayLen }, dayLen, nightLen };
 }
 
+// Yamaganda and Gulika Kaal = this 1/8 of daytime (1-based), Sun..Sat (same convention as Rahu Kaal)
+export const RAHU_PART = RAHU;
+export const YAMA_PART = [5, 4, 3, 2, 1, 7, 6];
+export const GULIKA_PART = [7, 6, 5, 4, 3, 2, 1];
+
+/** The three daily "kaal" periods plus Abhijit muhurat for a choghadiya result. */
+export function kaals(r) {
+  const part = (n) => ({ from: r.rise + (n - 1) * r.dayLen, to: r.rise + n * r.dayLen });
+  const muhurta = (r.set - r.rise) / 15; // the day has 15 muhurtas; Abhijit is the 8th, centred on local noon
+  return {
+    rahu: r.rahu, yama: part(YAMA_PART[r.wd]), gulika: part(GULIKA_PART[r.wd]),
+    abhijit: { from: r.rise + 7 * muhurta, to: r.rise + 8 * muhurta, wednesday: r.wd === 3 },
+  };
+}
+
+// Hora: day and night are each split into 12 equal horas. The first hora of the day belongs to the weekday's planet,
+// then the planets follow the Chaldean order (the same order the day choghadiya cycle uses).
+export const PLANETS = {
+  sun: { en: 'Sun', hi: 'सूर्य', gu: 'સૂર્ય' }, venus: { en: 'Venus', hi: 'शुक्र', gu: 'શુક્ર' }, mercury: { en: 'Mercury', hi: 'बुध', gu: 'બુધ' },
+  moon: { en: 'Moon', hi: 'चंद्र', gu: 'ચંદ્ર' }, saturn: { en: 'Saturn', hi: 'शनि', gu: 'શનિ' }, jupiter: { en: 'Jupiter', hi: 'गुरु', gu: 'ગુરુ' },
+  mars: { en: 'Mars', hi: 'मंगल', gu: 'મંગળ' },
+};
+export const CHALDEAN = ['sun', 'venus', 'mercury', 'moon', 'saturn', 'jupiter', 'mars'];
+export const DAY_LORD = ['sun', 'moon', 'mars', 'mercury', 'jupiter', 'venus', 'saturn'];
+export function horas(r) {
+  const start = CHALDEAN.indexOf(DAY_LORD[r.wd]);
+  const dh = (r.set - r.rise) / 12, nh = (r.nextRise - r.set) / 12;
+  return Array.from({ length: 24 }, (_, i) => ({
+    k: CHALDEAN[(start + i) % 7], night: i >= 12,
+    from: i < 12 ? r.rise + i * dh : r.set + (i - 12) * nh, to: i < 12 ? r.rise + (i + 1) * dh : r.set + (i - 11) * nh,
+  }));
+}
+export const DAY_START_K = DAY_START;
+export const NIGHT_START_K = NIGHT_START;
+export const DAY_SEQ = (wd) => seq(DAY_ORDER, DAY_START[wd]);
+export const NIGHT_SEQ = (wd) => seq(NIGHT_ORDER, NIGHT_START[wd]);
+
 /** "6:42 AM" from minutes after midnight (wraps past midnight). */
 export function hm(min) {
   const t = Math.round(min) % 1440, h = Math.floor(t / 60), mm = t % 60;

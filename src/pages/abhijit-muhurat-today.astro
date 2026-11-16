@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES, forCity, kaalFor, span, wd, dt, hm, cityUrl, hasPage, bc, faq } from '../lib/site';
+const delhi = CITIES.find((c) => c.slug === 'delhi')!;
+const r = forCity(delhi), k = kaalFor(delhi), t = forCity(delhi, 1), kt = kaalFor(delhi, 1);
+const len = Math.round((r.set - r.rise) / 15);
+const all = [...CITIES].sort((a, b) => a.en.localeCompare(b.en)).map((c) => ({ c, k: kaalFor(c) }));
+const week = Array.from({ length: 7 }, (_, i) => ({ r: forCity(delhi, i), k: kaalFor(delhi, i) }));
+const qs: [string, string][] = [
+  ['What is Abhijit muhurat?', 'Abhijit is the 8th of the 15 muhurtas (equal parts) of the daytime, so it sits around local noon and lasts about 48 minutes. It is considered one of the most powerful muhurats of the day and is traditionally said to remove many doshas (faults) of a chosen time.'],
+  ['What time is Abhijit muhurat today?', `In Delhi on ${wd(r)} ${dt(r)}: ${k.abhijit.wednesday ? `${span(k.abhijit)}, but it is traditionally not used on Wednesday` : span(k.abhijit)}. Other cities are in the table on this page.`],
+  ['Why is Abhijit muhurat not used on Wednesday?', 'By tradition, Abhijit muhurat is considered inauspicious on Wednesdays, so most panchangs leave it out on that day.'],
+  ['Does Abhijit muhurat overlap Rahu Kaal?', 'Twice a week. On Wednesday Rahu Kaal is the 5th eighth of the day, which covers the second half of Abhijit; on Friday it is the 4th eighth, which covers the first half. Many people use only the minutes of Abhijit outside Rahu Kaal on those days. The city table shows both times side by side.'],
+];
+const schema = [bc(Astro.site, [['Choghadiya today', '/'], ['Abhijit muhurat today', '/abhijit-muhurat-today/']]), faq(qs)];
+---
+<Base schema={schema} title={`Abhijit Muhurat Today ${dt(r)}: Time for Your City | आज का अभिजीत मुहूर्त`}
+      description={`Abhijit muhurat today (${wd(r)}, ${dt(r)}): Delhi ${span(k.abhijit)}. Abhijit timing for ${CITIES.length} Indian cities, this week, and why it is not used on Wednesday.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › Abhijit muhurat today</p>
+  <h1>Abhijit muhurat today <span class="hi">| आज का अभिजीत मुहूर्त</span></h1>
+  <p class="answer"><strong>{wd(r)}, {dt(r)}</strong>: Abhijit muhurat in Delhi is <strong>{span(k.abhijit)}</strong> ({len} minutes, centred on local noon at {hm((r.rise + r.set) / 2)}).
+    {k.abhijit.wednesday && <> Today is Wednesday, when Abhijit muhurat is traditionally <strong>not</strong> used.</>} Tomorrow: {kt.abhijit.wednesday ? 'Wednesday, not used' : span(kt.abhijit)}.</p>
+
+  <h2>Abhijit muhurat today in every city</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>City</th><th class="num">Abhijit muhurat</th><th class="num">Rahu Kaal</th></tr>
+    {all.map(({ c, k: q }) => <tr><td>{hasPage(c) ? <a href={cityUrl(c)}>{c.en}</a> : c.en} <span class="hi">{c.hi}</span></td><td class="num"><strong>{span(q.abhijit)}</strong></td><td class="num">{span(q.rahu)}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>Abhijit muhurat this week (Delhi)</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>Date</th><th class="num">Abhijit muhurat</th><th>Note</th></tr>
+    {week.map(({ r: w, k: q }) => <tr><td>{wd(w)} {w.d}/{w.m}</td><td class="num">{span(q.abhijit)}</td><td>{q.abhijit.wednesday ? 'Wednesday: traditionally not used' : ''}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>What Abhijit muhurat means</h2>
+  <p>A muhurta (मुहूर्त) is an old Indian unit of time: the day from sunrise to sunset is split into 15 muhurtas and the night into another 15, so each is about 48 minutes. The 8th daytime muhurta, around midday when the sun is highest, is called Abhijit (अभिजीत, "victorious"). It is associated with Lord Vishnu and is often described as the strongest muhurta of the day.</p>
+  <p>Because it is so widely accepted, Abhijit is the usual fall-back when no other good time is available: for starting a journey, filing papers, a purchase or a new venture. For major ceremonies such as marriage, priests still check the full panchang.</p>
+
+  <h2>How it is calculated here</h2>
+  <p>Abhijit runs from 7/15 to 8/15 of the way between sunrise and sunset. Sunrise and sunset are computed for each city's coordinates, so in Delhi today the 15 muhurtas are each {len} minutes long. In winter the muhurtas are shorter than 48 minutes and in summer longer; the midpoint is always local solar noon, which is earlier in eastern India than in the west.</p>
+  <p>Related: <a href="/shubh-muhurat-today/">shubh muhurat today</a> · <a href="/rahu-kaal-today/">Rahu Kaal today</a> · <a href="/hora-today/">hora today</a>.</p>
+
+  <h2>Frequently asked questions</h2>
+  {qs.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+</Base>

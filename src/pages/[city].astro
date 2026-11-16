@@ -1,7 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import { CITY_NOTES } from '../data/city-notes';
 import ChogTable from '../components/ChogTable.astro';
-import { CITIES, PAGE_CITIES, GU_CITIES, forCity, goodOf, label, span, wd, dt, hm, near, cityUrl, guUrl, type City } from '../lib/site';
+import { CITIES, PAGE_CITIES, GU_CITIES, forCity, goodOf, label, span, wd, dt, hm, near, cityUrl, guUrl, kaalFor, horaFor, planet, type City } from '../lib/site';
 
 export function getStaticPaths() { return PAGE_CITIES.map((c) => ({ params: { city: c.slug }, props: { c } })); }
 const { c } = Astro.props as { c: City };
@@ -18,6 +19,9 @@ const schema = [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', i
   { '@type': 'ListItem', position: 1, name: 'Choghadiya today', item: new URL('/', Astro.site).href },
   { '@type': 'ListItem', position: 2, name: `${c.en} choghadiya`, item: new URL(cityUrl(c), Astro.site).href }] }];
 const others = near(c);
+const k = kaalFor(c), hr = horaFor(c);
+const jup = hr.filter((x) => x.k === 'jupiter' && !x.night);
+const note = CITY_NOTES[c.slug];
 ---
 <Base title={title} description={description} schema={schema}>
   <p class="crumbs"><a href="/">Choghadiya today</a> › {c.state} › {c.en}</p>
@@ -25,19 +29,18 @@ const others = near(c);
   <p class="now-banner" data-now="today" hidden></p>
   <p class="answer"><strong>{wd(r)}, {dt(r)}</strong> <span class="hi">({wd(r, 'hi')})</span>: sunrise in {c.en} is at <strong>{hm(r.rise)}</strong> and sunset at <strong>{hm(r.set)}</strong>.
     Good times today: {best.map((b, i) => <>{i ? ', ' : ''}<strong>{label(b.k)}</strong> {span(b.p)}</>)}. Rahu Kaal is <strong>{span(r.rahu)}</strong>; avoid starting new work then.</p>
+  {note && <p>{note}</p>}
   <p class="muted" data-stale hidden>These times have been updated for today's date by your browser.</p>
 
   <h2>Aaj ka choghadiya in {c.en} <span class="hi">— आज का चौघड़िया</span></h2>
-  <div id="today"><ChogTable r={r} lat={c.lat} lon={c.lon} /></div>
+  <div id="today"><ChogTable r={r} lat={c.lat} lon={c.lon} compact /></div>
 
   <h2>Kal ka choghadiya: {wd(t)}, {dt(t)} <span class="hi">— कल का चौघड़िया</span></h2>
   <p>Tomorrow in {c.en} the sun rises at {hm(t.rise)} and sets at {hm(t.set)}. Rahu Kaal tomorrow: {span(t.rahu)}.</p>
-  <div class="chog" data-offset="1" data-lat={c.lat} data-lon={c.lon} data-lang="en" data-date={`${t.y}-${t.m}-${t.d}`}>
-    <div class="scroll"><table class="ct"><tbody>
-      <tr><th>Day</th><th>Time</th><th>Night</th><th>Time</th></tr>
-      {t.day.map((p, i) => <tr class={['amrit', 'shubh', 'labh', 'chal'].includes(p.k) ? 'g' : 'b'}><td>{label(p.k)} <span class="hi">{label(p.k, 'hi')}</span></td><td class="num">{span(p)}</td><td>{label(t.night[i].k)} <span class="hi">{label(t.night[i].k, 'hi')}</span></td><td class="num">{span(t.night[i])}</td></tr>)}
-    </tbody></table></div>
-  </div>
+  <p>Good periods tomorrow in {c.en}: {t.day.filter((p) => ['amrit', 'shubh', 'labh'].includes(p.k)).map((p, i) => <>{i ? ', ' : ''}<strong>{label(p.k)}</strong> {span(p)}</>)}. <a href="/tomorrow/">Tomorrow's full choghadiya →</a></p>
+
+  <h2>Rahu Kaal and Abhijit muhurat in {c.en} today</h2>
+  <p>In {c.en} today <a href="/rahu-kaal-today/">Rahu Kaal</a> is <strong>{span(k.rahu)}</strong>, Yamaganda {span(k.yama)} and Gulika Kaal {span(k.gulika)}. <a href="/abhijit-muhurat-today/">Abhijit muhurat</a> is {span(k.abhijit)}{k.abhijit.wednesday ? ' (traditionally not used on Wednesday)' : ''}. The day horas begin with {planet(hr[0].k)} at sunrise, and the Jupiter hora runs {jup.map((x) => span(x)).join(' and ')}. <a href="/hora-today/">Hora chart →</a></p>
 
   <h2>Shubh muhurat this week in {c.en}</h2>
   <p>The first Amrit, Shubh and Labh choghadiya of each day in {c.en}, with Rahu Kaal to avoid.</p>

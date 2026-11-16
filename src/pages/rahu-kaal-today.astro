@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES, MAJOR, forCity, kaalFor, span, wd, dt, hm, cityUrl, hasPage, bc, faq } from '../lib/site';
+import { WEEKDAY, RAHU_PART, YAMA_PART, GULIKA_PART } from '../lib/chog.mjs';
+const delhi = CITIES.find((c) => c.slug === 'delhi')!;
+const r = forCity(delhi), k = kaalFor(delhi), kt = kaalFor(delhi, 1), t = forCity(delhi, 1);
+const all = [...CITIES].sort((a, b) => a.en.localeCompare(b.en)).map((c) => ({ c, k: kaalFor(c), r: forCity(c) }));
+const early = [...all].sort((a, b) => a.k.rahu.from - b.k.rahu.from);
+const spread = Math.round(early[early.length - 1].k.rahu.from - early[0].k.rahu.from);
+const week = Array.from({ length: 7 }, (_, i) => ({ r: forCity(delhi, i), k: kaalFor(delhi, i) }));
+// the textbook chart assumes a 6:00 AM sunrise and 6:00 PM sunset (each part = 90 minutes)
+const ref = (n: number) => `${hm(360 + (n - 1) * 90)} – ${hm(360 + n * 90)}`;
+const qs: [string, string][] = [
+  ['What time is Rahu Kaal today?', `In Delhi on ${wd(r)} ${dt(r)}, Rahu Kaal is ${span(k.rahu)}. It is different in every city because it depends on local sunrise and sunset; the table on this page gives today's time for ${CITIES.length} Indian cities.`],
+  ['How is Rahu Kaal calculated?', 'The time from sunrise to sunset is divided into eight equal parts. Rahu Kaal is one of those parts, fixed by weekday: the 8th part on Sunday, 2nd on Monday, 7th on Tuesday, 5th on Wednesday, 6th on Thursday, 4th on Friday and 3rd on Saturday.'],
+  ['What should not be done in Rahu Kaal?', 'Traditionally, new beginnings are avoided: starting a business or journey, buying property, gold or a vehicle, signing agreements and auspicious ceremonies. Work already in progress can continue.'],
+  ['Is Rahu Kaal the same as Rahu Kalam?', 'Yes. Rahu Kaal, Rahu Kalam (Tamil, Malayalam), Rahu Kalamu (Telugu) and Rahukala (Kannada) are names for the same daily period.'],
+  ['Is there Rahu Kaal at night?', 'In the common system Rahu Kaal is observed only during the daytime, between sunrise and sunset.'],
+];
+const schema = [bc(Astro.site, [['Choghadiya today', '/'], ['Rahu Kaal today', '/rahu-kaal-today/']]), faq(qs)];
+---
+<Base schema={schema} title={`Rahu Kaal Today ${dt(r)}: Timing for ${CITIES.length} Cities | आज का राहु काल`}
+      description={`Rahu Kaal today (${wd(r)}, ${dt(r)}): Delhi ${span(k.rahu)}. Rahu Kaal, Yamaganda and Gulika Kaal for ${CITIES.length} Indian cities from local sunrise, plus tomorrow and the weekday chart.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › Rahu Kaal today</p>
+  <h1>Rahu Kaal today <span class="hi">| आज का राहु काल</span></h1>
+  <p class="answer"><strong>{wd(r)}, {dt(r)}</strong> <span class="hi">({wd(r, 'hi')})</span>: Rahu Kaal in Delhi is <strong>{span(k.rahu)}</strong>. Yamaganda is {span(k.yama)} and Gulika Kaal {span(k.gulika)}. Your city's time is in the table below: across India today it varies by about {spread >= 60 ? `${Math.floor(spread / 60)} h ${spread % 60} min` : `${spread} minutes`}, because Rahu Kaal moves with local sunrise.</p>
+
+  <h2>Rahu Kaal today in every city</h2>
+  <p>Times are for {wd(r)}, {dt(r)}. Rahu Kaal is today's {RAHU_PART[r.wd]}{['st', 'nd', 'rd'][RAHU_PART[r.wd] - 1] ?? 'th'} eighth of the daytime; Yamaganda the {YAMA_PART[r.wd]}{['st', 'nd', 'rd'][YAMA_PART[r.wd] - 1] ?? 'th'}; Gulika the {GULIKA_PART[r.wd]}{['st', 'nd', 'rd'][GULIKA_PART[r.wd] - 1] ?? 'th'}.</p>
+  <div class="scroll"><table><tbody>
+    <tr><th>City</th><th class="num">Sunrise</th><th class="num">Rahu Kaal</th><th class="num">Yamaganda</th><th class="num">Gulika</th></tr>
+    {all.map(({ c, k: q, r: s }) => <tr><td>{hasPage(c) ? <a href={cityUrl(c)}>{c.en}</a> : c.en} <span class="hi">{c.hi}</span></td><td class="num">{hm(s.rise)}</td><td class="num"><strong>{span(q.rahu)}</strong></td><td class="num">{span(q.yama)}</td><td class="num">{span(q.gulika)}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>Rahu Kaal tomorrow <span class="hi">— कल का राहु काल</span></h2>
+  <p>Tomorrow, {wd(t)} {dt(t)}, Rahu Kaal in Delhi is <strong>{span(kt.rahu)}</strong>. In the larger cities:</p>
+  <ul class="grid">{MAJOR.slice(0, 16).map((c) => <li><a href={cityUrl(c)}>{c.en}</a><br /><span class="muted">{span(kaalFor(c, 1).rahu)}</span></li>)}</ul>
+
+  <h2>Rahu Kaal this week (Delhi)</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>Date</th><th class="num">Sunrise</th><th class="num">Sunset</th><th class="num">Rahu Kaal</th><th class="num">Yamaganda</th><th class="num">Gulika</th></tr>
+    {week.map(({ r: w, k: q }) => <tr><td>{wd(w)} {w.d}/{w.m}</td><td class="num">{hm(w.rise)}</td><td class="num">{hm(w.set)}</td><td class="num"><strong>{span(q.rahu)}</strong></td><td class="num">{span(q.yama)}</td><td class="num">{span(q.gulika)}</td></tr>)}
+  </tbody></table></div>
+
+  <h2>Rahu Kaal chart by weekday</h2>
+  <p>This is the chart printed in many calendars. It assumes sunrise at exactly 6:00 AM and sunset at 6:00 PM, which is almost never true, so use it to remember the order, and the tables above for real times.</p>
+  <div class="scroll"><table><tbody>
+    <tr><th>Weekday</th><th class="num">Rahu Kaal</th><th class="num">Yamaganda</th><th class="num">Gulika Kaal</th></tr>
+    {WEEKDAY.en.map((w, i) => <tr><td>{w} <span class="hi">{WEEKDAY.hi[i]}</span></td><td class="num">{ref(RAHU_PART[i])}</td><td class="num">{ref(YAMA_PART[i])}</td><td class="num">{ref(GULIKA_PART[i])}</td></tr>)}
+  </tbody></table></div>
+  <p class="muted">A handy memory aid for the order is "Mother Saw Father Wearing The Turban Suddenly": Monday, Saturday, Friday, Wednesday, Thursday, Tuesday, Sunday, the weekdays in the order their Rahu Kaal falls through the day, from the 2nd eighth to the 8th.</p>
+
+  <h2>What is Rahu Kaal?</h2>
+  <p>In Vedic astrology Rahu is the north node of the Moon, a shadow planet associated with obstacles and confusion. Each day one-eighth of the daytime is assigned to Rahu, and work begun in that period is traditionally believed to meet delays or fail. The custom is followed most strictly in South India, where Rahu Kalam is printed in every daily calendar, but it is widely observed across the country.</p>
+  <p>Rahu Kaal is not the same as <a href="/kaal-choghadiya/">Kaal choghadiya</a>. Choghadiya is a separate system with seven named periods; Rahu Kaal is a single period per day fixed by weekday. Many people check both: they look for a good choghadiya such as <a href="/amrit-choghadiya/">Amrit</a>, <a href="/shubh-choghadiya/">Shubh</a> or <a href="/labh-choghadiya/">Labh</a> that does not overlap Rahu Kaal.</p>
+
+  <h2>Yamaganda and Gulika Kaal</h2>
+  <p><strong>Yamaganda</strong> (Yamagandam) is another eighth of the day, associated with Yama, and is avoided for new and auspicious work in the same way as Rahu Kaal. <strong>Gulika Kaal</strong> (Gulikai) belongs to Gulika, considered a son of Saturn. The traditional belief about Gulika is that whatever is done in it tends to repeat, so it is avoided for sad events such as funerals, while some people use it for things they would like to recur.</p>
+
+  <h2>What to do and avoid during Rahu Kaal</h2>
+  <ul>
+    <li><strong>Traditionally avoided:</strong> starting a business, a journey or a new job; buying property, gold or a vehicle; signing agreements; engagement, marriage or griha pravesh.</li>
+    <li><strong>Fine to continue:</strong> routine work and anything already started before Rahu Kaal began.</li>
+    <li><strong>Traditionally recommended:</strong> prayers to Durga or Rahu, which many temples hold during Rahu Kaal on Tuesdays and Fridays.</li>
+  </ul>
+  <p>For a good time to start something today, see <a href="/shubh-muhurat-today/">shubh muhurat today</a> or <a href="/abhijit-muhurat-today/">Abhijit muhurat</a>.</p>
+
+  <h2>Frequently asked questions</h2>
+  {qs.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+</Base>

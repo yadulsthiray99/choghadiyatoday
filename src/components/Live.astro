@@ -21,7 +21,7 @@
           const p = rows[i]; const n = (NAMES as any)[p.k];
           tr.className = n.good ? 'g' : 'b'; tr.dataset.from = String(Math.round(p.from)); tr.dataset.to = String(Math.round(p.to));
           const td = tr.children;
-          (td[0] as HTMLElement).innerHTML = `<strong>${n[lang]}</strong>${lang === 'en' ? ` <span class="hi">${n.hi}</span>` : ''}`;
+          (td[0] as HTMLElement).innerHTML = `${box.dataset.compact ? `<span title="${n.good ? 'Good' : 'Avoid'}">${n.good ? '✓' : '✗'} </span>` : ''}<strong>${n[lang]}</strong>${lang === 'en' ? ` <span class="hi">${n.hi}</span>` : ''}`;
           td[1].textContent = `${hm(p.from)} – ${hm(p.to)}`;
         });
         box.dataset.date = `${r.y}-${r.m}-${r.d}`;

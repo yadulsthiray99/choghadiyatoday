@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { CITIES, MAJOR, forCity, kaalFor, label, span, wd, dt, hm, cityUrl, bc, faq } from '../lib/site';
+type I = { from: number; to: number };
+// good daytime choghadiya (Amrit, Shubh, Labh) with Rahu Kaal, Yamaganda and Gulika cut out
+function clean(c: (typeof CITIES)[number], off = 0) {
+  const r = forCity(c, off), k = kaalFor(c, off);
+  const bad = [k.rahu, k.yama, k.gulika];
+  const out: (I & { k: string })[] = [];
+  for (const p of r.day.filter((x) => ['amrit', 'shubh', 'labh'].includes(x.k))) {
+    let parts: I[] = [{ from: p.from, to: p.to }];
+    for (const b of bad) parts = parts.flatMap((s) => b.to <= s.from || b.from >= s.to ? [s] : [{ from: s.from, to: b.from }, { from: b.to, to: s.to }].filter((x) => x.to - x.from >= 10));
+    parts.forEach((s) => out.push({ ...s, k: p.k }));
+  }
+  return { r, k, out: out.sort((a, b) => a.from - b.from) };
+}
+const delhi = CITIES.find((c) => c.slug === 'delhi')!;
+const D = clean(delhi), T = clean(delhi, 1);
+const rows = MAJOR.slice(0, 20).map((c) => ({ c, ...clean(c) }));
+const qs: [string, string][] = [
+  ['What is the shubh muhurat today?', `On ${wd(D.r)} ${dt(D.r)} in Delhi the clear auspicious windows (Amrit, Shubh or Labh choghadiya outside Rahu Kaal, Yamaganda and Gulika) are ${D.out.map((p) => `${span(p)} (${label(p.k)})`).join(', ') || 'none during the day'}.${D.k.abhijit.wednesday ? '' : ` Abhijit muhurat is ${span(D.k.abhijit)}.`}`],
+  ['Is this muhurat valid for marriage or griha pravesh?', 'No. Marriage, griha pravesh, mundan and similar ceremonies need a full muhurat that also checks the tithi, nakshatra, yoga and the people\'s horoscopes. This page shows the daily good hours used for everyday beginnings: a purchase, a journey, a new account or a meeting.'],
+  ['Why are the times different for my city?', 'Choghadiya and the kaal periods are fractions of local daylight, so they start at different times in each city. Use the city table on this page or your city\'s choghadiya page.'],
+];
+const schema = [bc(Astro.site, [['Choghadiya today', '/'], ['Shubh muhurat today', '/shubh-muhurat-today/']]), faq(qs)];
+---
+<Base schema={schema} title={`Shubh Muhurat Today ${dt(D.r)}: Good Time to Start Work | आज का शुभ मुहूर्त`}
+      description={`Shubh muhurat today (${wd(D.r)}, ${dt(D.r)}): good hours for new work in Delhi and 20 cities: Amrit, Shubh and Labh choghadiya outside Rahu Kaal, Yamaganda and Gulika, plus Abhijit muhurat.`}>
+  <p class="crumbs"><a href="/">Choghadiya today</a> › Shubh muhurat today</p>
+  <h1>Shubh muhurat today <span class="hi">| आज का शुभ मुहूर्त</span></h1>
+  <p class="answer"><strong>{wd(D.r)}, {dt(D.r)}</strong>. Good times to start work in Delhi today:
+    {D.out.length ? D.out.map((p, i) => <>{i ? ', ' : ' '}<strong>{span(p)}</strong> ({label(p.k)})</>) : ' no clear daytime window today'}.
+    {D.k.abhijit.wednesday ? ' Abhijit muhurat is traditionally not used on Wednesday.' : <> Abhijit muhurat: <strong>{span(D.k.abhijit)}</strong>.</>}
+    Avoid Rahu Kaal {span(D.k.rahu)}.</p>
+
+  <h2>How these times are chosen</h2>
+  <p>For everyday beginnings, a "shubh muhurat" is usually found in two steps. First take the auspicious daytime choghadiya, <a href="/amrit-choghadiya/">Amrit</a>, <a href="/shubh-choghadiya/">Shubh</a> and <a href="/labh-choghadiya/">Labh</a>. Then remove any part that overlaps <a href="/rahu-kaal-today/">Rahu Kaal, Yamaganda or Gulika Kaal</a>. What remains is listed below, together with <a href="/abhijit-muhurat-today/">Abhijit muhurat</a>, the midday window considered strong enough to use on most days.</p>
+
+  <h2>Shubh muhurat today by city</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>City</th><th>Good windows today</th><th class="num">Abhijit</th><th class="num">Avoid (Rahu Kaal)</th></tr>
+    {rows.map(({ c, out, k }) => <tr><td><a href={cityUrl(c)}>{c.en}</a> <span class="hi">{c.hi}</span></td><td>{out.map((p) => `${span(p)} ${label(p.k)}`).join(' · ') || '—'}</td><td class="num">{k.abhijit.wednesday ? '—' : span(k.abhijit)}</td><td class="num">{span(k.rahu)}</td></tr>)}
+  </tbody></table></div>
+  <p class="muted">Night choghadiya can also be used (for example, Diwali puja after sunset); see each city page for the night periods.</p>
+
+  <h2>Shubh muhurat tomorrow <span class="hi">— कल का शुभ मुहूर्त</span></h2>
+  <p>{wd(T.r)}, {dt(T.r)} in Delhi: {T.out.map((p) => `${span(p)} (${label(p.k)})`).join(', ') || 'no clear daytime window'}{T.k.abhijit.wednesday ? '' : `; Abhijit ${span(T.k.abhijit)}`}. Rahu Kaal {span(T.k.rahu)}. <a href="/tomorrow/">Full choghadiya for tomorrow →</a></p>
+
+  <h2>Which muhurat for which work</h2>
+  <div class="scroll"><table><tbody>
+    <tr><th>Work</th><th>Traditionally preferred</th></tr>
+    <tr><td>Opening a shop, first sale, new account book</td><td>Labh or Amrit choghadiya</td></tr>
+    <tr><td>Puja, religious ceremony, starting studies</td><td>Shubh or Amrit choghadiya</td></tr>
+    <tr><td>Starting a journey</td><td>Amrit or Chal choghadiya, outside Rahu Kaal</td></tr>
+    <tr><td>Buying gold, a vehicle or property</td><td>Amrit, Shubh or Labh; many also avoid Gulika and Yamaganda</td></tr>
+    <tr><td>Government work, meeting officials</td><td>Udveg choghadiya or Sun hora is the traditional exception</td></tr>
+    <tr><td>Marriage, griha pravesh, mundan</td><td>A full panchang muhurat from a priest</td></tr>
+  </tbody></table></div>
+  <p>For an hour-by-hour view by planet, see <a href="/hora-today/">hora today</a>.</p>
+
+  <h2>Frequently asked questions</h2>
+  {qs.map(([q, a]) => <><h3>{q}</h3><p>{a}</p></>)}
+</Base>
