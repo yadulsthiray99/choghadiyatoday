@@ -39,6 +39,12 @@
       if (cur && el) {
         const n = (NAMES as any)[(cur as any).k]; const t = T[lang];
         el.innerHTML = `<b>${t[0]}:</b> <span class="${n.good ? 'up' : 'down'}">${n[lang]} (${n.good ? t[2] : t[3]})</span> ${lang === 'en' ? 'until ' + hm((cur as any).to) : hm((cur as any).to) + ' ' + t[1]}`;
+        // next Amrit / Shubh / Labh period after now, with a countdown
+        const nx = rows.find((p) => ['amrit', 'shubh', 'labh'].includes(p.k) && p.from > now);
+        if (nx) { const mins = Math.round(nx.from - now), nn = (NAMES as any)[nx.k]; el.innerHTML += `<br><span class="nextgood">${lang === 'en' ? 'Next good' : lang === 'hi' ? 'अगला शुभ' : 'આગળનું શુભ'}: <strong>${nn[lang]}</strong> ${hm(nx.from)} – ${hm(nx.to)} <em>(${lang === 'en' ? 'in ' : ''}${mins >= 60 ? Math.floor(mins / 60) + ' h ' : ''}${mins % 60} min${lang === 'hi' ? ' में' : ''})</em></span>`; }
+        const city = document.querySelector('#home-city')?.textContent?.replace(/ choghadiya today$/, '') || document.querySelector('h1')?.textContent || '';
+        const msg = `${city} choghadiya now: ${n.en} until ${hm((cur as any).to)}${nx ? `. Next good: ${(NAMES as any)[nx.k].en} at ${hm(nx.from)}` : ''}. ${location.origin}${location.pathname}`;
+        el.innerHTML += ` <a class="wa" href="https://wa.me/?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">WhatsApp</a>`;
         el.hidden = false;
       }
     });
